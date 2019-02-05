@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "gatsby": "^2.0.115",
-    "gatsby-theme-apollo": "0.0.50"
+    "gatsby-theme-apollo": "0.0.51"
   },
   "devDependencies": {
     "@trevorblades/eslint-config": "^6.21.0",
