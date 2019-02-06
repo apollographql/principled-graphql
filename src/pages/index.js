@@ -72,6 +72,7 @@ export default function Home(props) {
         </Sidebar>
         <ContentWrapper>
           <h1>Test</h1>
+          <p>More content goes here</p>
         </ContentWrapper>
       </FlexWrapper>
     </Layout>
