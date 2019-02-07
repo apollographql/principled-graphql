@@ -1,14 +1,17 @@
+/** @jsx jsx */
 import ContentWrapper from 'gatsby-theme-apollo/src/components/content-wrapper';
 import FlexWrapper from 'gatsby-theme-apollo/src/components/flex-wrapper';
+import Helmet from 'react-helmet';
 import Layout from 'gatsby-theme-apollo/src/components/layout';
 import PropTypes from 'prop-types';
-import React from 'react';
 import Sidebar from 'gatsby-theme-apollo/src/components/sidebar';
 import SidebarNav from 'gatsby-theme-apollo/src/components/sidebar-nav';
 import colors from 'gatsby-theme-apollo/src/util/colors';
 import styled from '@emotion/styled';
+import {ReactComponent as IntegrityIcon} from '../assets/icons/integrity.svg';
 import {Link, graphql} from 'gatsby';
 import {MdChevronLeft, MdChevronRight} from 'react-icons/md';
+import {css, jsx} from '@emotion/core';
 import {size} from 'polished';
 
 const StyledContentWrapper = styled(ContentWrapper)({
@@ -20,9 +23,20 @@ const Content = styled.div({
   maxWidth: 800
 });
 
+const MainHeading = styled.h1({
+  display: 'flex',
+  alignItems: 'center'
+});
+
+const iconStyles = css(size(65), {
+  marginRight: 18,
+  borderRadius: '50%',
+  fill: colors.text1
+});
+
 const PageNav = styled.nav({
   display: 'flex',
-  padding: '24px 0'
+  padding: '64px 0'
 });
 
 const PageNavLink = styled(Link)({
@@ -50,6 +64,7 @@ const PageNavLinkTitle = styled.div({
 
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
 export default function Page(props) {
+  // set up a base sidebar config with the overview page at the root
   const sidebarConfig = {
     null: [
       {
@@ -59,6 +74,8 @@ export default function Page(props) {
     ]
   };
 
+  // loop through all the pages and construct a sidebar nav based on each
+  // page's generated table of contents
   props.data.allMarkdownRemark.edges.forEach(({node}) => {
     if (!node.tableOfContents) {
       return;
@@ -76,16 +93,23 @@ export default function Page(props) {
     sidebarConfig[node.frontmatter.title] = matches;
   });
 
+  // determine current page's place in the order
+  const {title, path, color} = props.data.markdownRemark.frontmatter;
   const pageIndex = props.data.allMarkdownRemark.edges.findIndex(
-    ({node}) =>
-      node.frontmatter.path === props.data.markdownRemark.frontmatter.path
+    ({node}) => node.frontmatter.path === path
   );
 
+  // define next and previous pages
   const previousPage = props.data.allMarkdownRemark.edges[pageIndex - 1];
   const nextPage = props.data.allMarkdownRemark.edges[pageIndex + 1];
 
+  console.log(props.data.markdownRemark.frontmatter);
+
   return (
     <Layout>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
       <FlexWrapper>
         <Sidebar title={props.data.site.siteMetadata.title}>
           <SidebarNav
@@ -96,7 +120,15 @@ export default function Page(props) {
         </Sidebar>
         <StyledContentWrapper>
           <Content>
-            <h1>{props.data.markdownRemark.frontmatter.title}</h1>
+            <MainHeading>
+              {color && (
+                <IntegrityIcon
+                  css={iconStyles}
+                  style={{backgroundColor: color}}
+                />
+              )}
+              {title}
+            </MainHeading>
             <hr />
             <div
               dangerouslySetInnerHTML={{__html: props.data.markdownRemark.html}}
@@ -147,6 +179,7 @@ export const pageQuery = graphql`
       frontmatter {
         path
         title
+        color
       }
     }
 

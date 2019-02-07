@@ -2,6 +2,7 @@
 path: /agility
 title: Agility
 order: 2
+color: '#95e7e4'
 ---
 
 ## 4. Abstract, Demand-Oriented Schema

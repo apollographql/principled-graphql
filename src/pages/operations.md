@@ -2,6 +2,7 @@
 path: /operations
 title: Operations
 order: 3
+color: '#F7bce3'
 ---
 
 ## 8. Access and Demand Control

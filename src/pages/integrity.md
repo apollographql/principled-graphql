@@ -2,6 +2,7 @@
 path: /integrity
 title: Integrity
 order: 1
+color: '#acbaea'
 ---
 
 ## 1. One Graph

@@ -19,7 +19,7 @@ It is difficult to solve these problems in a scalable or sustainable way without
 
 This rapid adoption creates a need for more information about how to “do GraphQL right”. The GraphQL specification only describes the syntax of a GraphQL query, not how to to build or use a data graph, in the same way that the SQL specification only describes how to parse SQL statements, not how to build or use a relational database. What is needed are established best practices for the entire data graph layer, and for an industry-wide vocabulary that enables us to have crisp and detailed conversations about these best practices. 
 
-At Apollo, we've been building industry leading data graph technology since 2015, and our software is now used in over 90% of GraphQL implementations. We've had hundreds of conversations with GraphQL users of all shapes and sizes. So we've distilled their experiences into a set of best practices for creating, maintaining, and operating a data graph. We present them here as 10 GraphQL Principles in a format inspired by the [Twelve Factor App](https://12factor.net).
+At [Apollo](https://apollographql.com), we've been building industry leading data graph technology since 2015, and our software is now used in over 90% of GraphQL implementations. We've had hundreds of conversations with GraphQL users of all shapes and sizes. So we've distilled their experiences into a set of best practices for creating, maintaining, and operating a data graph. We present them here as 10 GraphQL Principles in a format inspired by the [Twelve Factor App](https://12factor.net).
 
 The 10 principles break down into three categories:
 
