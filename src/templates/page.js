@@ -38,8 +38,7 @@ export default function Page(props) {
     while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
       matches.push({
         path: match[1],
-        title: match[2],
-        link: true
+        title: match[2]
       });
     }
 
@@ -57,9 +56,13 @@ export default function Page(props) {
           />
         </Sidebar>
         <StyledContentWrapper>
-          <Content
-            dangerouslySetInnerHTML={{__html: props.data.markdownRemark.html}}
-          />
+          <Content>
+            <h1>{props.data.markdownRemark.frontmatter.title}</h1>
+            <hr />
+            <div
+              dangerouslySetInnerHTML={{__html: props.data.markdownRemark.html}}
+            />
+          </Content>
         </StyledContentWrapper>
       </FlexWrapper>
     </Layout>
