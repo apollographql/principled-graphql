@@ -33,7 +33,7 @@ const MainHeading = styled.h1({
 const iconStyles = css(size(65), {
   marginRight: 18,
   borderRadius: '50%',
-  fill: colors.text1
+  fill: 'currentColor'
 });
 
 const PageNav = styled.nav({
