@@ -1,7 +1,7 @@
 ---
 path: /integrity
 title: Integrity
-order: 0
+order: 1
 ---
 
 ## 1. One Graph

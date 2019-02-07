@@ -1,7 +1,7 @@
 ---
 path: /agility
 title: Agility
-order: 1
+order: 2
 ---
 
 ## 4. Abstract, Demand-Oriented Schema
