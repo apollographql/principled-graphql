@@ -8,9 +8,11 @@ import Sidebar from 'gatsby-theme-apollo/src/components/sidebar';
 import SidebarNav from 'gatsby-theme-apollo/src/components/sidebar-nav';
 import colors from 'gatsby-theme-apollo/src/util/colors';
 import styled from '@emotion/styled';
+import {ReactComponent as AgilityIcon} from '../assets/icons/agility.svg';
 import {ReactComponent as IntegrityIcon} from '../assets/icons/integrity.svg';
 import {Link, graphql} from 'gatsby';
 import {MdChevronLeft, MdChevronRight} from 'react-icons/md';
+import {ReactComponent as OperationsIcon} from '../assets/icons/operations.svg';
 import {css, jsx} from '@emotion/core';
 import {size} from 'polished';
 
@@ -63,6 +65,12 @@ const PageNavLinkTitle = styled.div({
 });
 
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
+const iconComponents = {
+  '/integrity': IntegrityIcon,
+  '/agility': AgilityIcon,
+  '/operations': OperationsIcon
+};
+
 export default function Page(props) {
   // set up a base sidebar config with the overview page at the root
   const sidebarConfig = {
@@ -103,7 +111,7 @@ export default function Page(props) {
   const previousPage = props.data.allMarkdownRemark.edges[pageIndex - 1];
   const nextPage = props.data.allMarkdownRemark.edges[pageIndex + 1];
 
-  console.log(props.data.markdownRemark.frontmatter);
+  const Icon = iconComponents[path];
 
   return (
     <Layout>
@@ -121,11 +129,8 @@ export default function Page(props) {
         <StyledContentWrapper>
           <Content>
             <MainHeading>
-              {color && (
-                <IntegrityIcon
-                  css={iconStyles}
-                  style={{backgroundColor: color}}
-                />
+              {Icon && (
+                <Icon css={iconStyles} style={{backgroundColor: color}} />
               )}
               {title}
             </MainHeading>
