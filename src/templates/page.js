@@ -195,14 +195,7 @@ export default class Page extends Component {
 
   render() {
     // set up a base sidebar config with the overview page at the root
-    const sidebarConfig = {
-      null: [
-        {
-          path: '/',
-          title: 'Overview'
-        }
-      ]
-    };
+    const sidebarConfig = {};
 
     // loop through all the pages and construct a sidebar nav based on each
     // page's generated table of contents

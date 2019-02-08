@@ -10,7 +10,7 @@
     "gatsby": "^2.0.115",
     "gatsby-remark-autolink-headers": "^2.0.13",
     "gatsby-source-filesystem": "^2.0.20",
-    "gatsby-theme-apollo": "0.0.61",
+    "gatsby-theme-apollo": "0.0.64",
     "gatsby-transformer-remark": "^2.2.4"
   },
   "devDependencies": {
