@@ -153,6 +153,13 @@ export default class Page extends Component {
 
   componentDidMount() {
     window.addEventListener('keydown', this.onKeyDown);
+
+    const hashElement = document.getElementById(
+      this.props.location.hash.slice(1)
+    );
+    if (hashElement) {
+      hashElement.scrollIntoView();
+    }
   }
 
   componentWillUnmount() {
@@ -209,7 +216,10 @@ export default class Page extends Component {
       while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
         matches.push({
           path: match[1],
-          title: match[2]
+          title: match[2],
+          link:
+            node.frontmatter.path ===
+            this.props.location.pathname.replace(/\/$/, '')
         });
       }
 
