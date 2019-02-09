@@ -15,15 +15,17 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages'
+        path: `${__dirname}/src/content`,
+        name: 'content'
       }
     },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
-        plugins: ['gatsby-remark-autolink-headers']
+        plugins: ['gatsby-remark-autolink-headers', 'gatsby-remark-images']
       }
-    }
+    },
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp'
   ]
 };

@@ -1,8 +1,13 @@
 ---
 path: /
-title: Overview
 order: 0
 ---
+
+# Principled GraphQL
+
+<div class="float">
+  <img src="../images/overview.png">
+</div>
 
 Why is GraphQL becoming so popular? It's because GraphQL, despite the name, isn't simply a query language. It's a comprehensive solution to the problem of connecting modern apps to services in the cloud. As such, it forms the basis for a new and important layer in the modern application development stack. At Apollo, we call this new layer the data graph. Its function is to bring all of a company's app data and services together in one place, with one unified, consistent, secure, and easy-to-use interface, so that anyone can draw on it as needed with minimal friction.
 

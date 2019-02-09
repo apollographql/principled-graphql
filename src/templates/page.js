@@ -5,16 +5,13 @@ import Helmet from 'react-helmet';
 import Layout from 'gatsby-theme-apollo/src/components/layout';
 import LogoTitle from 'gatsby-theme-apollo/src/components/logo-title';
 import PropTypes from 'prop-types';
-import React, {Component, createRef} from 'react';
+import React, {Component, Fragment, createRef} from 'react';
 import Sidebar from 'gatsby-theme-apollo/src/components/sidebar';
 import SidebarNav from 'gatsby-theme-apollo/src/components/sidebar-nav';
 import colors from 'gatsby-theme-apollo/src/util/colors';
 import styled from '@emotion/styled';
-import {ReactComponent as AgilityIcon} from '../assets/icons/agility.svg';
-import {ReactComponent as IntegrityIcon} from '../assets/icons/integrity.svg';
 import {Link, graphql} from 'gatsby';
 import {MdChevronLeft, MdChevronRight, MdMenu} from 'react-icons/md';
-import {ReactComponent as OperationsIcon} from '../assets/icons/operations.svg';
 import {breakpointMd} from 'gatsby-theme-apollo/src/util/breakpoints';
 import {css} from '@emotion/core';
 import {findDOMNode} from 'react-dom';
@@ -52,12 +49,14 @@ const MenuButton = styled.button({
 
 const MainHeading = styled.h1({
   display: 'flex',
-  alignItems: 'center',
-  svg: css(size(65), {
-    marginRight: 18,
-    borderRadius: '50%',
-    fill: 'currentColor'
-  })
+  alignItems: 'center'
+});
+
+const HeadingImage = styled.img({
+  width: 80,
+  margin: 0,
+  marginRight: 18,
+  fill: 'currentColor'
 });
 
 const Markdown = styled.div({
@@ -66,6 +65,12 @@ const Markdown = styled.div({
     svg: {
       fill: 'currentColor'
     }
+  },
+  '.float': {
+    width: '50%',
+    marginLeft: 24,
+    marginBottom: 24,
+    float: 'right'
   }
 });
 
@@ -139,11 +144,6 @@ const Divider = styled.hr({
 });
 
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
-const iconComponents = {
-  '/integrity': IntegrityIcon,
-  '/agility': AgilityIcon,
-  '/operations': OperationsIcon
-};
 
 export default class Page extends Component {
   static propTypes = {
@@ -200,7 +200,7 @@ export default class Page extends Component {
     // loop through all the pages and construct a sidebar nav based on each
     // page's generated table of contents
     this.props.data.allMarkdownRemark.edges.forEach(({node}) => {
-      if (!node.tableOfContents) {
+      if (node.frontmatter.path === '/' || !node.tableOfContents) {
         return;
       }
 
@@ -220,7 +220,7 @@ export default class Page extends Component {
     });
 
     // determine current page's place in the order
-    const {title, path, color} = this.props.data.markdownRemark.frontmatter;
+    const {title, path, image} = this.props.data.markdownRemark.frontmatter;
     const pageIndex = this.props.data.allMarkdownRemark.edges.findIndex(
       ({node}) => node.frontmatter.path === path
     );
@@ -228,9 +228,6 @@ export default class Page extends Component {
     // define next and previous pages
     const previousPage = this.props.data.allMarkdownRemark.edges[pageIndex - 1];
     const nextPage = this.props.data.allMarkdownRemark.edges[pageIndex + 1];
-
-    // find an icon for the current path
-    const Icon = iconComponents[path];
 
     return (
       <Layout>
@@ -258,11 +255,17 @@ export default class Page extends Component {
             </MobileHeader>
             <ContentWrapper>
               <Content>
-                <MainHeading>
-                  {Icon && <Icon style={{backgroundColor: color}} />}
-                  {title}
-                </MainHeading>
-                <hr />
+                {title && (
+                  <Fragment>
+                    <MainHeading>
+                      {image && (
+                        <HeadingImage src={image.childImageSharp.fluid.src} />
+                      )}
+                      {title}
+                    </MainHeading>
+                    <hr />
+                  </Fragment>
+                )}
                 <Markdown
                   dangerouslySetInnerHTML={{
                     __html: this.props.data.markdownRemark.html
@@ -323,7 +326,13 @@ export const pageQuery = graphql`
       frontmatter {
         path
         title
-        color
+        image {
+          childImageSharp {
+            fluid {
+              src
+            }
+          }
+        }
       }
     }
 
