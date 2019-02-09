@@ -51,3 +51,4 @@ Some examples of the power of data-graph-aware tooling include:
 * As app developers are building the new features, the new queries that power those features can be extracted from their code and shared with the operations team. With this proactive awareness, the operations team can proactively provision the needed capacity – interject early in the development process if the query can't be approved at the intended scale.
 * When apps are developed in a typed language like Typescript, Java, or Swift, type information can be propagated all the way from service type declarations through every line of code in the app, ensuring full-stack type correctness and catching errors the instant they're made.
 
+<!-- end -->

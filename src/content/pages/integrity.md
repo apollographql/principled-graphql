@@ -35,3 +35,4 @@ Just as it is important to track source code in a version control system, it is 
 
 The schema registry should then become the central hub of the system, powering any developer tools, workflows, or business processes that would benefit from being aware of the data graph and any actual or proposed changes to it.
 
+<!-- end -->

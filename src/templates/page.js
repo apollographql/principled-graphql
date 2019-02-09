@@ -12,7 +12,10 @@ import colors from 'gatsby-theme-apollo/src/util/colors';
 import styled from '@emotion/styled';
 import {Link, graphql} from 'gatsby';
 import {MdChevronLeft, MdChevronRight, MdMenu} from 'react-icons/md';
-import {breakpointMd} from 'gatsby-theme-apollo/src/util/breakpoints';
+import {
+  breakpointMd,
+  breakpointSm
+} from 'gatsby-theme-apollo/src/util/breakpoints';
 import {css} from '@emotion/core';
 import {findDOMNode} from 'react-dom';
 import {size} from 'polished';
@@ -53,13 +56,19 @@ const MainHeading = styled.h1({
 });
 
 const HeadingImage = styled.img({
-  width: 80,
+  width: '2em',
   margin: 0,
-  marginRight: 18,
-  fill: 'currentColor'
+  marginRight: '0.5em'
 });
 
 const Markdown = styled.div({
+  a: {
+    color: colors.primary,
+    textDecoration: 'none',
+    ':hover': {
+      textDecoration: 'underline'
+    }
+  },
   '.anchor': {
     color: 'inherit',
     svg: {
@@ -70,7 +79,12 @@ const Markdown = styled.div({
     width: '50%',
     marginLeft: 24,
     marginBottom: 24,
-    float: 'right'
+    float: 'right',
+    [breakpointSm]: {
+      width: '100%',
+      marginLeft: 0,
+      float: 'none'
+    }
   }
 });
 
@@ -143,6 +157,23 @@ const Divider = styled.hr({
   maxWidth: 400
 });
 
+const Chapter = styled.div({
+  marginTop: 64
+});
+
+const ChapterHeading = styled.h2({
+  display: 'flex',
+  alignItems: 'center'
+});
+
+const SectionTitle = styled.h4({
+  marginBottom: 8
+});
+
+const SectionDescription = styled.p({
+  fontSize: '1rem'
+});
+
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
 
 export default class Page extends Component {
@@ -194,11 +225,10 @@ export default class Page extends Component {
   closeSidebar = () => this.setState({sidebarOpen: false});
 
   render() {
-    // set up a base sidebar config with the overview page at the root
-    const sidebarConfig = {};
-
     // loop through all the pages and construct a sidebar nav based on each
     // page's generated table of contents
+    const tableOfContents = {};
+    const imageForTitle = {};
     this.props.data.allMarkdownRemark.edges.forEach(({node}) => {
       if (node.frontmatter.path === '/' || !node.tableOfContents) {
         return;
@@ -207,16 +237,26 @@ export default class Page extends Component {
       let match;
       const matches = [];
       while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
+        const title = match[2];
+        const description = node.excerpt.slice(
+          node.excerpt.indexOf(title) + title.length
+        );
         matches.push({
           path: match[1],
-          title: match[2],
+          title,
+          description: description
+            .slice(0, description.indexOf('.') + 1)
+            .trim()
+            .replace(/\*/g, ''),
           link:
             node.frontmatter.path ===
             this.props.location.pathname.replace(/\/$/, '')
         });
       }
 
-      sidebarConfig[node.frontmatter.title] = matches;
+      tableOfContents[node.frontmatter.title] = matches;
+      imageForTitle[node.frontmatter.title] =
+        node.frontmatter.image.childImageSharp.fluid.src;
     });
 
     // determine current page's place in the order
@@ -242,7 +282,7 @@ export default class Page extends Component {
           >
             <SidebarNav
               alwaysExpanded
-              contents={sidebarConfig}
+              contents={tableOfContents}
               pathname={this.props.location.pathname}
             />
           </Sidebar>
@@ -266,11 +306,36 @@ export default class Page extends Component {
                     <hr />
                   </Fragment>
                 )}
-                <Markdown
-                  dangerouslySetInnerHTML={{
-                    __html: this.props.data.markdownRemark.html
-                  }}
-                />
+                <Markdown>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: this.props.data.markdownRemark.html
+                    }}
+                  />
+                  {this.props.location.pathname === '/' && (
+                    <div>
+                      {Object.keys(tableOfContents).map(key => (
+                        <Chapter key={key}>
+                          <ChapterHeading>
+                            <HeadingImage src={imageForTitle[key]} />
+                            {key}
+                          </ChapterHeading>
+                          <hr />
+                          {tableOfContents[key].map(content => (
+                            <div key={content.path}>
+                              <SectionTitle>
+                                <Link to={content.path}>{content.title}</Link>
+                              </SectionTitle>
+                              <SectionDescription>
+                                {content.description}
+                              </SectionDescription>
+                            </div>
+                          ))}
+                        </Chapter>
+                      ))}
+                    </div>
+                  )}
+                </Markdown>
                 <PageNav>
                   {previousPage && (
                     <PageNavLink to={previousPage.node.frontmatter.path}>
@@ -278,7 +343,7 @@ export default class Page extends Component {
                       <PageNavLinkText>
                         <PageNavLinkHeading>Previous</PageNavLinkHeading>
                         <PageNavLinkTitle>
-                          {previousPage.node.frontmatter.title}
+                          {previousPage.node.frontmatter.title || 'Overview'}
                         </PageNavLinkTitle>
                       </PageNavLinkText>
                     </PageNavLink>
@@ -339,6 +404,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(sort: {order: ASC, fields: [frontmatter___order]}) {
       edges {
         node {
+          excerpt
           tableOfContents(pathToSlugField: "frontmatter.path", maxDepth: 2)
           headings {
             depth
@@ -347,6 +413,13 @@ export const pageQuery = graphql`
           frontmatter {
             path
             title
+            image {
+              childImageSharp {
+                fluid {
+                  src
+                }
+              }
+            }
           }
         }
       }
