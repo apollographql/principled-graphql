@@ -1,6 +1,7 @@
 ---
 path: /operations
 title: Operations
+description: Securely deploying the graph to production at scale
 order: 3
 image: ../images/operations.png
 ---

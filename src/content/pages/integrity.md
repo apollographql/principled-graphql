@@ -1,6 +1,7 @@
 ---
 path: /integrity
 title: Integrity
+description: Ensuring that the graph is well-defined, stable, and consistent
 order: 1
 image: ../images/integrity.png
 ---

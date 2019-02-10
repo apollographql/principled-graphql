@@ -15,7 +15,7 @@ exports.createPages = async ({actions, graphql}) => {
     }
   `);
 
-  const pageTemplate = path.resolve('src/templates/page.js');
+  const pageTemplate = path.resolve('src/templates/page/index.js');
   result.data.allMarkdownRemark.edges.forEach(({node}) => {
     actions.createPage({
       path: node.frontmatter.path,
