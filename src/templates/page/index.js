@@ -11,6 +11,7 @@ import Sidebar from 'gatsby-theme-apollo/src/components/sidebar';
 import SidebarNav from 'gatsby-theme-apollo/src/components/sidebar-nav';
 import ogImage from '../../assets/images/og-image.png';
 import styled from '@emotion/styled';
+import twitterImage from '../../assets/images/twitter-image.png';
 import {MdMenu} from 'react-icons/md';
 import {breakpointMd} from 'gatsby-theme-apollo/src/util/breakpoints';
 import {css} from '@emotion/core';
@@ -137,7 +138,6 @@ export default class Page extends Component {
       });
 
     const {title, description} = this.props.data.site.siteMetadata;
-    console.log(this.props.location);
     return (
       <Layout>
         <Helmet>
@@ -151,7 +151,7 @@ export default class Page extends Component {
           <meta name="twitter:description" content={description} />
           <meta
             name="twitter:image"
-            content={this.props.location.origin + ogImage}
+            content={this.props.location.origin + twitterImage}
           />
         </Helmet>
         <FlexWrapper onClick={this.onWrapperClick}>
