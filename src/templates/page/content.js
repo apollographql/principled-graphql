@@ -28,10 +28,9 @@ const ChapterDescription = styled.h4({
   color: colors.text2
 });
 
-const HeadingImage = styled.img({
-  width: '2em',
+const HeadingImage = styled.img(size('2.5em'), {
   margin: 0,
-  marginRight: '0.5em'
+  marginRight: '0.25em'
 });
 
 const Markdown = styled.div({
