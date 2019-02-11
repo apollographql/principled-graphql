@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, {Component, createRef} from 'react';
 import Sidebar from 'gatsby-theme-apollo/src/components/sidebar';
 import SidebarNav from 'gatsby-theme-apollo/src/components/sidebar-nav';
+import ogImage from '../../assets/images/og-image.png';
 import styled from '@emotion/styled';
 import {MdMenu} from 'react-icons/md';
 import {breakpointMd} from 'gatsby-theme-apollo/src/util/breakpoints';
@@ -137,16 +138,20 @@ export default class Page extends Component {
       {}
     );
 
+    const {title, description} = this.props.data.site.siteMetadata;
     return (
       <Layout>
         <Helmet>
           <title>{this.props.data.markdownRemark.frontmatter.title}</title>
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={ogImage} />
         </Helmet>
         <FlexWrapper onClick={this.onWrapperClick}>
           <Sidebar
             ref={this.sidebar}
             open={this.state.sidebarOpen}
-            title={this.props.data.site.siteMetadata.title}
+            title={title}
           >
             <SidebarNav
               alwaysExpanded
@@ -221,6 +226,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        description
       }
     }
   }
