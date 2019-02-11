@@ -104,7 +104,7 @@ export default class Page extends Component {
         const pages = [];
         while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
           const path = match[1];
-          const hash = path.slice(path.lastIndexOf('/'));
+          const hash = path.slice(path.lastIndexOf('/') + 1);
           const title = match[2];
           const description = node.excerpt.slice(
             node.excerpt.indexOf(title) + title.length
