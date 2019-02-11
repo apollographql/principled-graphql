@@ -151,7 +151,9 @@ export default class Page extends Component {
           <meta name="twitter:description" content={description} />
           <meta
             name="twitter:image"
-            content={this.props.location.origin + twitterImage}
+            content={
+              'https://apollographql.com/principledgraphql' + twitterImage
+            }
           />
         </Helmet>
         <FlexWrapper onClick={this.onWrapperClick}>
