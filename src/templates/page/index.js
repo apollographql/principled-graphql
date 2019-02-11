@@ -165,7 +165,7 @@ export default class Page extends Component {
               isHome={location.pathname === '/'}
               chapters={chapters}
               page={this.props.data.markdownRemark}
-              pages={this.props.data.allMarkdownRemark}
+              pages={this.props.data.allMarkdownRemark.edges}
             />
             <Footer />
           </OuterContentWrapper>

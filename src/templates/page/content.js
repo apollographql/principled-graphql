@@ -119,13 +119,13 @@ const SectionDescription = styled.p({
 export default function Content(props) {
   // determine current page's place in the order
   const {title, description, path, image} = props.page.frontmatter;
-  const pageIndex = props.pages.edges.findIndex(
+  const pageIndex = props.pages.findIndex(
     ({node}) => node.frontmatter.path === path
   );
 
   // define next and previous pages
-  const previousPage = props.pages.edges[pageIndex - 1];
-  const nextPage = props.pages.edges[pageIndex + 1];
+  const previousPage = props.pages[pageIndex - 1];
+  const nextPage = props.pages[pageIndex + 1];
 
   return (
     <ContentWrapper>
