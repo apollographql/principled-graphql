@@ -97,17 +97,17 @@ export default class Page extends Component {
   render() {
     // generate a representation of the chapters and sections within them to
     // render the sidebar and table of contents on the overview page
-    const chapters = this.props.data.allMarkdownRemark.edges
+    const contents = this.props.data.allMarkdownRemark.edges
       .filter(({node}) => node.frontmatter.path !== '/' && node.tableOfContents)
       .map(({node}) => {
         let match;
-        const sections = [];
+        const pages = [];
         while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
           const title = match[2];
           const description = node.excerpt.slice(
             node.excerpt.indexOf(title) + title.length
           );
-          sections.push({
+          pages.push({
             path: match[1],
             title,
             description: description
@@ -122,22 +122,13 @@ export default class Page extends Component {
         }
 
         return {
-          path: node.frontmatter.path,
+          path: node.frontmatter.path + '/',
           title: node.frontmatter.title,
           description: node.frontmatter.description,
           image: node.frontmatter.image.childImageSharp.fluid.src,
-          sections
+          pages
         };
       });
-
-    // the sidebar expects the page structure in an object keyed by titles
-    const sidebarConfig = chapters.reduce(
-      (acc, chapter) => ({
-        ...acc,
-        [chapter.title]: chapter.sections
-      }),
-      {}
-    );
 
     const {title, description} = this.props.data.site.siteMetadata;
     return (
@@ -157,7 +148,7 @@ export default class Page extends Component {
             <SidebarNav
               alwaysExpanded
               pathname={this.props.location.pathname}
-              contents={sidebarConfig}
+              contents={contents}
             />
           </Sidebar>
           <OuterContentWrapper>
@@ -169,7 +160,7 @@ export default class Page extends Component {
             </MobileHeader>
             <Content
               isHome={this.props.location.pathname === '/'}
-              chapters={chapters}
+              contents={contents}
               page={this.props.data.markdownRemark}
               pages={this.props.data.allMarkdownRemark.edges}
             />

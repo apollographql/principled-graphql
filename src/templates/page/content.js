@@ -150,25 +150,25 @@ export default function Content(props) {
           />
           {props.isHome && (
             <div>
-              {props.chapters.map(chapter => (
-                <Chapter key={chapter.path}>
+              {props.contents.map(content => (
+                <Chapter key={content.path}>
                   <ChapterHeading>
-                    <HeadingImage src={chapter.image} />
+                    <HeadingImage src={content.image} />
                     <span>
-                      {chapter.title}
+                      {content.title}
                       <ChapterDescription>
-                        {chapter.description}
+                        {content.description}
                       </ChapterDescription>
                     </span>
                   </ChapterHeading>
                   <hr />
-                  {chapter.sections.map(section => (
-                    <div key={section.path}>
+                  {content.pages.map(page => (
+                    <div key={page.path}>
                       <SectionTitle>
-                        <Link to={section.path}>{section.title}</Link>
+                        <Link to={page.path}>{page.title}</Link>
                       </SectionTitle>
                       <SectionDescription>
-                        {section.description}
+                        {page.description}
                       </SectionDescription>
                     </div>
                   ))}
@@ -213,5 +213,5 @@ Content.propTypes = {
   isHome: PropTypes.bool.isRequired,
   page: PropTypes.object.isRequired,
   pages: PropTypes.array.isRequired,
-  chapters: PropTypes.array.isRequired
+  contents: PropTypes.array.isRequired
 };
