@@ -1,4 +1,3 @@
-/* global Munchkin */
 import Content from './content';
 import FlexWrapper from 'gatsby-theme-apollo/src/components/flex-wrapper';
 import Footer from './footer';
@@ -10,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, {Component, createRef} from 'react';
 import Sidebar from 'gatsby-theme-apollo/src/components/sidebar';
 import SidebarNav from 'gatsby-theme-apollo/src/components/sidebar-nav';
-import loadScript from '@segment/load-script';
 import ogImage from '../../assets/images/og-image.png';
 import styled from '@emotion/styled';
 import {MdMenu} from 'react-icons/md';
@@ -61,12 +59,6 @@ export default class Page extends Component {
   };
 
   componentDidMount() {
-    loadScript('//munchkin.marketo.net/munchkin.js', err => {
-      if (!err) {
-        Munchkin.init('627-RVJ-941');
-      }
-    });
-
     window.addEventListener('keydown', this.onKeyDown);
 
     const hashElement = document.getElementById(
