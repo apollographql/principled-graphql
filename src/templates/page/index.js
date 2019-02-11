@@ -103,12 +103,14 @@ export default class Page extends Component {
         let match;
         const pages = [];
         while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
+          const path = match[1];
+          const hash = path.slice(path.lastIndexOf('/'));
           const title = match[2];
           const description = node.excerpt.slice(
             node.excerpt.indexOf(title) + title.length
           );
           pages.push({
-            path: match[1],
+            path: node.frontmatter.path + hash,
             title,
             description: description
               .slice(0, description.indexOf('.') + 1)
@@ -122,15 +124,13 @@ export default class Page extends Component {
         }
 
         return {
-          path: node.frontmatter.path + '/',
+          path: node.frontmatter.path,
           title: node.frontmatter.title,
           description: node.frontmatter.description,
           image: node.frontmatter.image.childImageSharp.fluid.src,
           pages
         };
       });
-
-    console.log(this.props.data.allMarkdownRemark);
 
     const {title, description} = this.props.data.site.siteMetadata;
     return (
