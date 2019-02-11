@@ -40,7 +40,7 @@ Because traces truly capture how a graph is being used, they can be used for a w
 
 Traces for all graph operations should be collected in one central place, so that there is one authoritative stream of traces. This stream can then be piped into other observability systems (perhaps after a simple transformation for existing systems that are not GraphQL-aware), or stored in one or more data warehouses for later use (aggregated and sampled as budget, use cases, and scale require). 
 
-## 10. Separate the GraphQL layer from the Service Layer
+## 10. Separate the GraphQL Layer from the Service Layer
 
 Adopt a *layered architecture* with data graph functionality broken into a separate tier rather than baked into every service.
 
