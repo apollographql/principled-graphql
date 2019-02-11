@@ -1,7 +1,7 @@
 import Content from './content';
 import FlexWrapper from 'gatsby-theme-apollo/src/components/flex-wrapper';
 import Footer from './footer';
-import Header from 'gatsby-theme-apollo/src/components/header';
+import Header, {headerHeight} from 'gatsby-theme-apollo/src/components/header';
 import Helmet from 'react-helmet';
 import Layout from 'gatsby-theme-apollo/src/components/layout';
 import LogoTitle from 'gatsby-theme-apollo/src/components/logo-title';
@@ -21,11 +21,16 @@ import {size} from 'polished';
 const OuterContentWrapper = styled.div({
   flexGrow: 1,
   overflow: 'auto',
-  '-webkit-overflow-scrolling': 'touch'
+  '-webkit-overflow-scrolling': 'touch',
+  [breakpointMd]: {
+    paddingTop: headerHeight
+  }
 });
 
 const MobileHeader = styled(Header)({
   display: 'none',
+  width: '100%',
+  position: 'fixed',
   [breakpointMd]: {
     display: 'flex'
   }
