@@ -130,6 +130,8 @@ export default class Page extends Component {
         };
       });
 
+    console.log(this.props.data.allMarkdownRemark);
+
     const {title, description} = this.props.data.site.siteMetadata;
     return (
       <Layout>
