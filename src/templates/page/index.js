@@ -137,6 +137,7 @@ export default class Page extends Component {
       });
 
     const {title, description} = this.props.data.site.siteMetadata;
+    console.log(this.props.location);
     return (
       <Layout>
         <Helmet>
@@ -148,7 +149,10 @@ export default class Page extends Component {
           <meta name="twitter:site" content="@apollographql" />
           <meta name="twitter:title" content={title} />
           <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={ogImage} />
+          <meta
+            name="twitter:image"
+            content={this.props.location.origin + ogImage}
+          />
         </Helmet>
         <FlexWrapper onClick={this.onWrapperClick}>
           <Sidebar
