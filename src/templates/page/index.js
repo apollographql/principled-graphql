@@ -61,8 +61,10 @@ export default class Page extends Component {
   };
 
   componentDidMount() {
-    loadScript('//munchkin.marketo.net/munchkin.js', () => {
-      Munchkin.init('627-RVJ-941');
+    loadScript('//munchkin.marketo.net/munchkin.js', err => {
+      if (!err) {
+        Munchkin.init('627-RVJ-941');
+      }
     });
 
     window.addEventListener('keydown', this.onKeyDown);
