@@ -1,4 +1,0 @@
-[build]
-  base = "/"
-  publish = "public/"
-  command = "gatsby build --prefix-paths && mkdir -p principledgraphql && mv public/* principledgraphql && mv principledgraphql public/"

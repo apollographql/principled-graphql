@@ -7,7 +7,6 @@ module.exports = {
       }
     }
   ],
-  pathPrefix: '/principledgraphql',
   siteMetadata: {
     title: 'Principled GraphQL',
     description: 'Best practices for implementing and scaling a data graph'

@@ -7,7 +7,6 @@
     "start": "npm run develop"
   },
   "dependencies": {
-    "@segment/load-script": "^1.0.1",
     "gatsby": "^2.0.115",
     "gatsby-plugin-sharp": "^2.0.20",
     "gatsby-remark-autolink-headers": "^2.0.13",
