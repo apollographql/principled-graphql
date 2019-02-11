@@ -20,7 +20,8 @@ import {size} from 'polished';
 
 const OuterContentWrapper = styled.div({
   flexGrow: 1,
-  overflow: 'auto'
+  overflow: 'auto',
+  '-webkit-overflow-scrolling': 'touch'
 });
 
 const MobileHeader = styled(Header)({
