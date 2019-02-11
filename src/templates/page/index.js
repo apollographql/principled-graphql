@@ -112,6 +112,7 @@ export default class Page extends Component {
             title,
             description: description
               .slice(0, description.indexOf('.') + 1)
+              .replace('>', '')
               .trim()
               .replace(/\*/g, ''),
             link:
