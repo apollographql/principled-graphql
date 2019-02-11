@@ -15,7 +15,7 @@ import {MdMenu} from 'react-icons/md';
 import {breakpointMd} from 'gatsby-theme-apollo/src/util/breakpoints';
 import {css} from '@emotion/core';
 import {findDOMNode} from 'react-dom';
-import {graphql} from 'gatsby';
+import {graphql, withPrefix} from 'gatsby';
 import {size} from 'polished';
 
 const OuterContentWrapper = styled.div({
@@ -109,6 +109,7 @@ export default class Page extends Component {
           const description = node.excerpt.slice(
             node.excerpt.indexOf(title) + title.length
           );
+
           pages.push({
             path: node.frontmatter.path + hash,
             title,
@@ -118,7 +119,7 @@ export default class Page extends Component {
               .trim()
               .replace(/\*/g, ''),
             link:
-              node.frontmatter.path ===
+              withPrefix(node.frontmatter.path) ===
               this.props.location.pathname.replace(/\/$/, '')
           });
         }
