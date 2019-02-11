@@ -105,22 +105,25 @@ export default class Page extends Component {
         while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
           const path = match[1];
           const hash = path.slice(path.lastIndexOf('/') + 1);
+          const hashPath = node.frontmatter.path + hash;
           const title = match[2];
           const description = node.excerpt.slice(
             node.excerpt.indexOf(title) + title.length
           );
 
+          const isLink =
+            withPrefix(node.frontmatter.path) ===
+            this.props.location.pathname.replace(/\/$/, '');
+
           pages.push({
-            path: node.frontmatter.path + hash,
+            path: isLink ? withPrefix(hashPath) : hashPath,
             title,
             description: description
               .slice(0, description.indexOf('.') + 1)
               .replace('>', '')
               .trim()
               .replace(/\*/g, ''),
-            link:
-              withPrefix(node.frontmatter.path) ===
-              this.props.location.pathname.replace(/\/$/, '')
+            link: isLink
           });
         }
 
