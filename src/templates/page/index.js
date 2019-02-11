@@ -167,7 +167,7 @@ export default class Page extends Component {
               <LogoTitle />
             </MobileHeader>
             <Content
-              isHome={location.pathname === '/'}
+              isHome={this.props.location.pathname === '/'}
               chapters={chapters}
               page={this.props.data.markdownRemark}
               pages={this.props.data.allMarkdownRemark.edges}
