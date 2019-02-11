@@ -98,7 +98,7 @@ export default class Page extends Component {
     // generate a representation of the chapters and sections within them to
     // render the sidebar and table of contents on the overview page
     const contents = this.props.data.allMarkdownRemark.edges
-      .filter(({node}) => node.frontmatter.path !== '/' && node.tableOfContents)
+      .filter(({node}) => node.frontmatter.order > 0 && node.tableOfContents)
       .map(({node}) => {
         let match;
         const pages = [];
@@ -159,7 +159,7 @@ export default class Page extends Component {
               <LogoTitle />
             </MobileHeader>
             <Content
-              isHome={this.props.location.pathname === '/'}
+              isHome={!this.props.data.markdownRemark.frontmatter.order}
               contents={contents}
               page={this.props.data.markdownRemark}
               pages={this.props.data.allMarkdownRemark.edges}
@@ -180,6 +180,7 @@ export const pageQuery = graphql`
         path
         title
         description
+        order
         image {
           childImageSharp {
             fluid {
@@ -203,6 +204,7 @@ export const pageQuery = graphql`
             path
             title
             description
+            order
             image {
               childImageSharp {
                 fluid {
