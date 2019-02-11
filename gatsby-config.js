@@ -7,6 +7,7 @@ module.exports = {
       }
     }
   ],
+  pathPrefix: '/principledgraphql',
   siteMetadata: {
     title: 'Principled GraphQL',
     description: 'Description here'
