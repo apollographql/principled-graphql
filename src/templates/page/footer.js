@@ -14,7 +14,14 @@ const Container = styled.footer({
 });
 
 const Colophon = styled.span({
-  margin: '20px 0'
+  margin: '20px 0',
+  a: {
+    color: colors.primary,
+    textDecoration: 'none',
+    ':hover': {
+      textDecoration: 'underline'
+    }
+  }
 });
 
 const FooterNav = styled.nav({
@@ -38,7 +45,10 @@ export default function Footer() {
   return (
     <Container>
       <LogoTitle />
-      <Colophon>Written by <a href="https://twitter.com/GeoffQL">Geoff Schmidt</a> and <a href="https://twitter.com/debergalis">Matt DeBergalis</a></Colophon>
+      <Colophon>
+        Written by <a href="https://twitter.com/GeoffQL">Geoff Schmidt</a> and{' '}
+        <a href="https://twitter.com/debergalis">Matt DeBergalis</a>
+      </Colophon>
       <Divider />
       <FooterNav>
         <a href="https://github.com/apollographql/principled-graphql">
