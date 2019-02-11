@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "develop": "gatsby develop",
-    "start": "npm run develop"
+    "start": "npm run develop",
+    "build": "gatsby build --prefix-paths && mkdir -p principledgraphql && mv public/* principledgraphql && mv principledgraphql public/"
   },
   "dependencies": {
     "gatsby": "^2.0.115",
