@@ -21,7 +21,7 @@ import {size} from 'polished';
 const OuterContentWrapper = styled.div({
   flexGrow: 1,
   overflow: 'auto',
-  '-webkit-overflow-scrolling': 'touch',
+  WebkitOverflowScrolling: 'touch',
   [breakpointMd]: {
     paddingTop: headerHeight
   }
