@@ -1,14 +1,9 @@
-import ContentWrapper from 'gatsby-theme-apollo/src/components/content-wrapper';
 import PropTypes from 'prop-types';
 import React, {Fragment} from 'react';
-import colors from 'gatsby-theme-apollo/src/util/colors';
 import styled from '@emotion/styled';
+import {ContentWrapper, breakpoints, colors} from 'gatsby-theme-apollo';
 import {Link} from 'gatsby';
 import {MdChevronLeft, MdChevronRight} from 'react-icons/md';
-import {
-  breakpointMd,
-  breakpointSm
-} from 'gatsby-theme-apollo/src/util/breakpoints';
 import {size} from 'polished';
 
 const InnerWrapper = styled.div({
@@ -52,7 +47,7 @@ const Markdown = styled.div({
     marginLeft: 24,
     marginBottom: 24,
     float: 'right',
-    [breakpointSm]: {
+    [breakpoints.sm]: {
       width: '100%',
       marginLeft: 0,
       float: 'none'
@@ -63,7 +58,7 @@ const Markdown = styled.div({
 const PageNav = styled.nav({
   display: 'flex',
   padding: '64px 0',
-  [breakpointMd]: {
+  [breakpoints.md]: {
     padding: '32px 0'
   }
 });
@@ -82,7 +77,7 @@ const PageNavLinkText = styled.div(({align = 'left'}) => {
   return {
     [marginProperty]: 24,
     textAlign: align,
-    [breakpointMd]: {
+    [breakpoints.md]: {
       [marginProperty]: 16
     }
   };
