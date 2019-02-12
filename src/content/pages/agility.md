@@ -1,6 +1,6 @@
 ---
 path: /agility
-title: Agility
+title: Agility Principles
 description: Rapidly rolling out the graph and continuously adapting it to changing needs
 order: 2
 image: ../images/agility.png

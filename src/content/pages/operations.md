@@ -1,6 +1,6 @@
 ---
 path: /operations
-title: Operations
+title: Operations Principles
 description: Securely deploying the graph to production at scale
 order: 3
 image: ../images/operations.png

@@ -1,6 +1,6 @@
 ---
 path: /integrity
-title: Integrity
+title: Integrity Principles
 description: Ensuring that the graph is well-defined, stable, and consistent
 order: 1
 image: ../images/integrity.png
