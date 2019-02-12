@@ -1,4 +1,3 @@
-import LogoTitle from 'gatsby-theme-apollo/src/components/logo-title';
 import React from 'react';
 import colors from 'gatsby-theme-apollo/src/util/colors';
 import styled from '@emotion/styled';

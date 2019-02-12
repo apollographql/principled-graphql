@@ -161,6 +161,7 @@ export default class Page extends Component {
         </Helmet>
         <FlexWrapper onClick={this.onWrapperClick}>
           <Sidebar
+            noLogo
             ref={this.sidebar}
             open={this.state.sidebarOpen}
             title={title}
