@@ -52,8 +52,7 @@ export default function Footer() {
       <LogoTitle noLogo />
       <Colophon>
         Written by <a href="https://twitter.com/GeoffQL">Geoff Schmidt</a> and{' '}
-        <a href="https://twitter.com/debergalis">Matt DeBergalis</a>, founders
-        of <a href="https://apollographql.com">Apollo</a>
+        <a href="https://twitter.com/debergalis">Matt DeBergalis</a>
       </Colophon>
       <Divider />
       <FooterNav>
