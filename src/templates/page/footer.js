@@ -1,3 +1,4 @@
+import LogoTitle from 'gatsby-theme-apollo/src/components/logo-title';
 import React from 'react';
 import colors from 'gatsby-theme-apollo/src/util/colors';
 import styled from '@emotion/styled';
@@ -13,6 +14,7 @@ const Container = styled.footer({
 });
 
 const Colophon = styled.span({
+  marginTop: 8,
   marginBottom: 20,
   a: {
     color: colors.primary,
@@ -47,6 +49,7 @@ const Divider = styled.hr({
 export default function Footer() {
   return (
     <Container>
+      <LogoTitle noLogo />
       <Colophon>
         Written by <a href="https://twitter.com/GeoffQL">Geoff Schmidt</a> and{' '}
         <a href="https://twitter.com/debergalis">Matt DeBergalis</a>
