@@ -7,7 +7,7 @@ const Container = styled.footer({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: 24,
+  padding: 32,
   fontSize: 14,
   color: colors.text1,
   backgroundColor: colors.background
@@ -52,7 +52,8 @@ export default function Footer() {
       <LogoTitle noLogo />
       <Colophon>
         Written by <a href="https://twitter.com/GeoffQL">Geoff Schmidt</a> and{' '}
-        <a href="https://twitter.com/debergalis">Matt DeBergalis</a>
+        <a href="https://twitter.com/debergalis">Matt DeBergalis</a>, founders
+        of <a href="https://apollographql.com">Apollo</a>
       </Colophon>
       <Divider />
       <FooterNav>

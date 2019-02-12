@@ -177,7 +177,7 @@ export default class Page extends Component {
               <MenuButton onClick={this.openSidebar}>
                 <MdMenu />
               </MenuButton>
-              <LogoTitle />
+              <LogoTitle noLogo />
             </MobileHeader>
             <Content
               isHome={!this.props.data.markdownRemark.frontmatter.order}
