@@ -6,14 +6,14 @@ const Container = styled.footer({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: 28,
+  padding: 24,
   fontSize: 14,
   color: colors.text1,
   backgroundColor: colors.background
 });
 
 const Colophon = styled.span({
-  margin: '20px 0',
+  marginBottom: 20,
   a: {
     color: colors.primary,
     textDecoration: 'none',
@@ -35,6 +35,10 @@ const FooterNav = styled.nav({
   }
 });
 
+const FooterNavLinks = styled.div({
+  marginTop: 4
+});
+
 const Divider = styled.hr({
   width: '100%',
   maxWidth: 400
@@ -45,15 +49,17 @@ export default function Footer() {
     <Container>
       <Colophon>
         Written by <a href="https://twitter.com/GeoffQL">Geoff Schmidt</a> and{' '}
-      <a href="https://twitter.com/debergalis">Matt DeBergalis</a>
+        <a href="https://twitter.com/debergalis">Matt DeBergalis</a>
       </Colophon>
       <Divider />
       <FooterNav>
         <a href="https://github.com/apollographql/principled-graphql">
           View source code
-        </a>{' '}
-        | <a href="https://apollographql.com">ApolloGraphQL.com</a> |{' '}
-        <a href="https://summit.graphql.com">GraphQL Summit</a>
+        </a>
+        <FooterNavLinks>
+          <a href="https://apollographql.com">ApolloGraphQL.com</a> |{' '}
+          <a href="https://summit.graphql.com">GraphQL Summit</a>
+        </FooterNavLinks>
       </FooterNav>
     </Container>
   );
