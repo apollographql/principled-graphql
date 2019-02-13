@@ -24,6 +24,7 @@ import {size} from 'polished';
 const OuterContentWrapper = styled.div({
   flexGrow: 1,
   overflow: 'auto',
+  outline: 'none',
   WebkitOverflowScrolling: 'touch',
   [breakpoints.md]: {
     paddingTop: headerHeight
@@ -176,7 +177,7 @@ export default class Page extends Component {
               contents={contents}
             />
           </Sidebar>
-          <OuterContentWrapper>
+          <OuterContentWrapper tabIndex="0">
             <MobileHeader>
               <MenuButton onClick={this.openSidebar}>
                 <MdMenu />
