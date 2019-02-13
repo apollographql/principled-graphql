@@ -1,18 +1,21 @@
 import Content from './content';
-import FlexWrapper from 'gatsby-theme-apollo/src/components/flex-wrapper';
 import Footer from './footer';
-import Header, {headerHeight} from 'gatsby-theme-apollo/src/components/header';
 import Helmet from 'react-helmet';
-import Layout from 'gatsby-theme-apollo/src/components/layout';
-import LogoTitle from 'gatsby-theme-apollo/src/components/logo-title';
 import PropTypes from 'prop-types';
 import React, {Component, createRef} from 'react';
-import Sidebar from 'gatsby-theme-apollo/src/components/sidebar';
-import SidebarNav from 'gatsby-theme-apollo/src/components/sidebar-nav';
 import ogImage from '../../assets/images/og-image.png';
 import styled from '@emotion/styled';
+import {
+  FlexWrapper,
+  Header,
+  Layout,
+  LogoTitle,
+  Sidebar,
+  SidebarNav,
+  breakpoints,
+  headerHeight
+} from 'gatsby-theme-apollo';
 import {MdMenu} from 'react-icons/md';
-import {breakpointMd} from 'gatsby-theme-apollo/src/util/breakpoints';
 import {css} from '@emotion/core';
 import {findDOMNode} from 'react-dom';
 import {graphql, withPrefix} from 'gatsby';
@@ -22,7 +25,7 @@ const OuterContentWrapper = styled.div({
   flexGrow: 1,
   overflow: 'auto',
   WebkitOverflowScrolling: 'touch',
-  [breakpointMd]: {
+  [breakpoints.md]: {
     paddingTop: headerHeight
   }
 });
@@ -31,7 +34,7 @@ const MobileHeader = styled(Header)({
   display: 'none',
   width: '100%',
   position: 'fixed',
-  [breakpointMd]: {
+  [breakpoints.md]: {
     display: 'flex'
   }
 });
@@ -162,6 +165,7 @@ export default class Page extends Component {
         <FlexWrapper onClick={this.onWrapperClick}>
           <Sidebar
             noLogo
+            responsive
             ref={this.sidebar}
             open={this.state.sidebarOpen}
             title={title}
