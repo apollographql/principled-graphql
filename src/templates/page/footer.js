@@ -60,7 +60,7 @@ export default function Footer() {
         </a>
         <FooterNavLinks>
           <a href="https://apollographql.com">ApolloGraphQL.com</a> |{' '}
-          <a href="https://summit.graphql.com">GraphQL Summit</a>
+          <a href="https://graphql-summit-2019.eventbrite.com">GraphQL Summit</a>
         </FooterNavLinks>
       </FooterNav>
     </Container>
