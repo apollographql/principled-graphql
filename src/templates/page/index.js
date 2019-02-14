@@ -2,24 +2,22 @@ import Content from './content';
 import Footer from './footer';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import React, {Component, createRef} from 'react';
+import React, {Component} from 'react';
 import ogImage from '../../assets/images/og-image.png';
 import styled from '@emotion/styled';
 import {
   FlexWrapper,
-  Header,
   Layout,
   LogoTitle,
+  MenuButton,
+  MobileHeader,
+  ResponsiveSidebar,
   Sidebar,
   SidebarNav,
   breakpoints,
   headerHeight
 } from 'gatsby-theme-apollo';
-import {MdMenu} from 'react-icons/md';
-import {css} from '@emotion/core';
-import {findDOMNode} from 'react-dom';
 import {graphql, withPrefix} from 'gatsby';
-import {size} from 'polished';
 
 const OuterContentWrapper = styled.div({
   flexGrow: 1,
@@ -31,27 +29,9 @@ const OuterContentWrapper = styled.div({
   }
 });
 
-const MobileHeader = styled(Header)({
-  display: 'none',
+const StyledMobileHeader = styled(MobileHeader)({
   width: '100%',
-  position: 'fixed',
-  [breakpoints.md]: {
-    display: 'flex'
-  }
-});
-
-const MenuButton = styled.button({
-  padding: 0,
-  marginRight: 20,
-  color: 'inherit',
-  border: 'none',
-  background: 'none',
-  outline: 'none',
-  cursor: 'pointer',
-  svg: css(size(24), {
-    display: 'block',
-    fill: 'currentColor'
-  })
+  position: 'fixed'
 });
 
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
@@ -63,8 +43,6 @@ export default class Page extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('keydown', this.onKeyDown);
-
     const hashElement = document.getElementById(
       this.props.location.hash.slice(1)
     );
@@ -72,37 +50,6 @@ export default class Page extends Component {
       hashElement.scrollIntoView();
     }
   }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.onKeyDown);
-  }
-
-  state = {
-    sidebarOpen: false
-  };
-
-  sidebar = createRef();
-
-  onKeyDown = event => {
-    // close the sidebar when esc key is pressed
-    if (this.state.sidebarOpen && event.keyCode === 27) {
-      this.closeSidebar();
-    }
-  };
-
-  onWrapperClick = event => {
-    if (
-      this.state.sidebarOpen &&
-      // eslint-disable-next-line react/no-find-dom-node
-      !findDOMNode(this.sidebar.current).contains(event.target)
-    ) {
-      this.closeSidebar();
-    }
-  };
-
-  openSidebar = () => this.setState({sidebarOpen: true});
-
-  closeSidebar = () => this.setState({sidebarOpen: false});
 
   render() {
     // generate a representation of the chapters and sections within them to
@@ -163,36 +110,38 @@ export default class Page extends Component {
             content={'https://principledgraphql.com' + ogImage}
           />
         </Helmet>
-        <FlexWrapper onClick={this.onWrapperClick}>
-          <Sidebar
-            noLogo
-            responsive
-            ref={this.sidebar}
-            open={this.state.sidebarOpen}
-            title={title}
-          >
-            <SidebarNav
-              alwaysExpanded
-              pathname={this.props.location.pathname}
-              contents={contents}
-            />
-          </Sidebar>
-          <OuterContentWrapper tabIndex="0">
-            <MobileHeader>
-              <MenuButton onClick={this.openSidebar}>
-                <MdMenu />
-              </MenuButton>
-              <LogoTitle noLogo />
-            </MobileHeader>
-            <Content
-              isHome={!this.props.data.markdownRemark.frontmatter.order}
-              contents={contents}
-              page={this.props.data.markdownRemark}
-              pages={this.props.data.allMarkdownRemark.edges}
-            />
-            <Footer />
-          </OuterContentWrapper>
-        </FlexWrapper>
+        <ResponsiveSidebar>
+          {({sidebarRef, onWrapperClick, sidebarOpen, openSidebar}) => (
+            <FlexWrapper onClick={onWrapperClick}>
+              <Sidebar
+                noLogo
+                responsive
+                ref={sidebarRef}
+                open={sidebarOpen}
+                title={title}
+              >
+                <SidebarNav
+                  alwaysExpanded
+                  pathname={this.props.location.pathname}
+                  contents={contents}
+                />
+              </Sidebar>
+              <OuterContentWrapper tabIndex="0">
+                <StyledMobileHeader>
+                  <MenuButton onClick={openSidebar} />
+                  <LogoTitle noLogo />
+                </StyledMobileHeader>
+                <Content
+                  isHome={!this.props.data.markdownRemark.frontmatter.order}
+                  contents={contents}
+                  page={this.props.data.markdownRemark}
+                  pages={this.props.data.allMarkdownRemark.edges}
+                />
+                <Footer />
+              </OuterContentWrapper>
+            </FlexWrapper>
+          )}
+        </ResponsiveSidebar>
       </Layout>
     );
   }
