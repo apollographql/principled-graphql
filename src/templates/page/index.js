@@ -17,7 +17,7 @@ import {
   breakpoints,
   headerHeight
 } from 'gatsby-theme-apollo';
-import {graphql, withPrefix} from 'gatsby';
+import {graphql} from 'gatsby';
 
 const OuterContentWrapper = styled.div({
   flexGrow: 1,
@@ -68,19 +68,17 @@ export default class Page extends Component {
             node.excerpt.indexOf(title) + title.length
           );
 
-          const isLink =
-            withPrefix(node.frontmatter.path) ===
-            this.props.location.pathname.replace(/\/$/, '');
-
           pages.push({
-            path: isLink ? withPrefix(hashPath) : hashPath,
+            path: hashPath,
             title,
             description: description
               .slice(0, description.indexOf('.') + 1)
               .replace('>', '')
               .trim()
               .replace(/\*/g, ''),
-            link: isLink
+            anchor:
+              node.frontmatter.path ===
+              this.props.location.pathname.replace(/\/$/, '')
           });
         }
 
