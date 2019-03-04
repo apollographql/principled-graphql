@@ -13,7 +13,7 @@
     "gatsby-remark-autolink-headers": "^2.0.13",
     "gatsby-remark-images": "^3.0.3",
     "gatsby-source-filesystem": "^2.0.20",
-    "gatsby-theme-apollo": "0.0.85",
+    "gatsby-theme-apollo": "0.0.96",
     "gatsby-transformer-remark": "^2.2.4",
     "gatsby-transformer-sharp": "^2.1.13"
   },
