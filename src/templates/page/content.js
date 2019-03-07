@@ -68,7 +68,10 @@ const PageNavLink = styled(Link)({
   alignItems: 'center',
   color: 'inherit',
   textDecoration: 'none',
-  svg: size(20)
+  svg: size(20),
+  ':hover': {
+    opacity: colors.hoverOpacity
+  }
 });
 
 const PageNavLinkText = styled.div(({align = 'left'}) => {
