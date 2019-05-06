@@ -80,11 +80,20 @@ const SectionDescription = styled.p({
 });
 
 export default function Content(props) {
-  // determine current page's place in the order
   const {title, description, path, image} = props.page.frontmatter;
+
+  // determine current page's place in the order
   const pageIndex = props.pages.findIndex(
     ({node}) => node.frontmatter.path === path
   );
+
+  // assign next and previous pages
+  const pages = props.pages.map(page => page.node.frontmatter);
+  const nextPage = pages[pageIndex + 1];
+  const prevPage = pages[pageIndex - 1];
+  if (prevPage && !prevPage.title) {
+    prevPage.title = 'Overview';
+  }
 
   return (
     <ContentWrapper>
@@ -136,10 +145,7 @@ export default function Content(props) {
             </div>
           )}
         </Markdown>
-        <PageNav
-          nextPage={props.pages[pageIndex + 1]}
-          previousPage={props.pages[pageIndex - 1]}
-        />
+        <PageNav prevPage={prevPage} nextPage={nextPage} />
       </InnerWrapper>
     </ContentWrapper>
   );
