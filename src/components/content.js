@@ -46,6 +46,9 @@ const Markdown = styled.div({
       fill: 'currentColor'
     }
   },
+  'h2:not(:first-child)': {
+    marginTop: 56
+  },
   '.float': {
     width: '50%',
     marginLeft: 24,
