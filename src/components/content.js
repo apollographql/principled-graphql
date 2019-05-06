@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
 import React, {Fragment} from 'react';
 import styled from '@emotion/styled';
-import {ContentWrapper, breakpoints, colors} from 'gatsby-theme-apollo';
+import {
+  ContentWrapper,
+  PageNav,
+  breakpoints,
+  colors
+} from 'gatsby-theme-apollo';
 import {Link} from 'gatsby';
-import {MdChevronLeft, MdChevronRight} from 'react-icons/md';
 import {size} from 'polished';
 
 const InnerWrapper = styled.div({
@@ -55,47 +59,6 @@ const Markdown = styled.div({
   }
 });
 
-const PageNav = styled.nav({
-  display: 'flex',
-  padding: '64px 0',
-  [breakpoints.md]: {
-    padding: '32px 0'
-  }
-});
-
-const PageNavLink = styled(Link)({
-  display: 'flex',
-  alignItems: 'center',
-  color: 'inherit',
-  textDecoration: 'none',
-  svg: size(20),
-  ':hover': {
-    opacity: colors.hoverOpacity
-  }
-});
-
-const PageNavLinkText = styled.div(({align = 'left'}) => {
-  const marginProperty = `margin${align.charAt(0).toUpperCase() +
-    align.slice(1)}`;
-  return {
-    [marginProperty]: 24,
-    textAlign: align,
-    [breakpoints.md]: {
-      [marginProperty]: 16
-    }
-  };
-});
-
-const PageNavLinkHeading = styled.div({
-  fontSize: 12,
-  letterSpacing: 2,
-  textTransform: 'uppercase'
-});
-
-const PageNavLinkTitle = styled.div({
-  color: colors.text1
-});
-
 const Chapter = styled.div({
   marginTop: 64
 });
@@ -119,10 +82,6 @@ export default function Content(props) {
   const pageIndex = props.pages.findIndex(
     ({node}) => node.frontmatter.path === path
   );
-
-  // define next and previous pages
-  const previousPage = props.pages[pageIndex - 1];
-  const nextPage = props.pages[pageIndex + 1];
 
   return (
     <ContentWrapper>
@@ -174,33 +133,10 @@ export default function Content(props) {
             </div>
           )}
         </Markdown>
-        <PageNav>
-          {previousPage && (
-            <PageNavLink to={previousPage.node.frontmatter.path}>
-              <MdChevronLeft />
-              <PageNavLinkText>
-                <PageNavLinkHeading>Previous</PageNavLinkHeading>
-                <PageNavLinkTitle>
-                  {previousPage.node.frontmatter.title || 'Overview'}
-                </PageNavLinkTitle>
-              </PageNavLinkText>
-            </PageNavLink>
-          )}
-          {nextPage && (
-            <PageNavLink
-              to={nextPage.node.frontmatter.path}
-              style={{marginLeft: 'auto'}}
-            >
-              <PageNavLinkText align="right">
-                <PageNavLinkHeading>Next</PageNavLinkHeading>
-                <PageNavLinkTitle>
-                  {nextPage.node.frontmatter.title}
-                </PageNavLinkTitle>
-              </PageNavLinkText>
-              <MdChevronRight />
-            </PageNavLink>
-          )}
-        </PageNav>
+        <PageNav
+          nextPage={props.pages[pageIndex + 1]}
+          previousPage={props.pages[pageIndex - 1]}
+        />
       </InnerWrapper>
     </ContentWrapper>
   );
