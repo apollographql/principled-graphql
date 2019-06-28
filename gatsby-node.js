@@ -1,5 +1,3 @@
-const path = require('path');
-
 exports.createPages = async ({actions, graphql}) => {
   const result = await graphql(`
     {
@@ -15,11 +13,11 @@ exports.createPages = async ({actions, graphql}) => {
     }
   `);
 
-  const pageTemplate = path.resolve('src/templates/page/index.js');
+  const template = require.resolve('./src/components/template');
   result.data.allMarkdownRemark.edges.forEach(({node}) => {
     actions.createPage({
       path: node.frontmatter.path,
-      component: pageTemplate
+      component: template
     });
   });
 };

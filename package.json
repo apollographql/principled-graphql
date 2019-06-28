@@ -7,13 +7,13 @@
     "start": "npm run develop"
   },
   "dependencies": {
-    "gatsby": "^2.0.115",
+    "gatsby": "^2.4.2",
     "gatsby-plugin-google-analytics": "^2.0.13",
-    "gatsby-plugin-sharp": "^2.0.20",
+    "gatsby-plugin-sharp": "^2.0.36",
     "gatsby-remark-autolink-headers": "^2.0.13",
     "gatsby-remark-images": "^3.0.3",
-    "gatsby-source-filesystem": "^2.0.20",
-    "gatsby-theme-apollo": "^0.1.0",
+    "gatsby-source-filesystem": "^2.0.33",
+    "gatsby-theme-apollo": "^1.0.0-alpha.18",
     "gatsby-transformer-remark": "^2.2.4",
     "gatsby-transformer-sharp": "^2.1.13"
   },

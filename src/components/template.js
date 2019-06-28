@@ -3,7 +3,7 @@ import Footer from './footer';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import ogImage from '../../assets/images/og-image.png';
+import ogImage from '../assets/images/og-image.png';
 import styled from '@emotion/styled';
 import {
   FlexWrapper,
@@ -36,7 +36,7 @@ const StyledMobileHeader = styled(MobileHeader)({
 
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
 
-export default class Page extends Component {
+export default class Template extends Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
