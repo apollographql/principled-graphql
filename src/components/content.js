@@ -6,7 +6,7 @@ import {
   PageNav,
   breakpoints,
   colors
-} from 'gatsby-theme-apollo';
+} from 'gatsby-theme-apollo-core';
 import {Link} from 'gatsby';
 import {size} from 'polished';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {LogoTitle, colors} from 'gatsby-theme-apollo';
+import {LogoTitle, colors} from 'gatsby-theme-apollo-core';
 
 const Container = styled.footer({
   display: 'flex',
