@@ -16,7 +16,7 @@ import {
   SidebarNav,
   breakpoints,
   headerHeight
-} from 'gatsby-theme-apollo';
+} from 'gatsby-theme-apollo-core';
 import {graphql} from 'gatsby';
 
 const OuterContentWrapper = styled.div({

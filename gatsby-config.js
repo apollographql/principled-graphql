@@ -1,17 +1,15 @@
 module.exports = {
-  __experimentalThemes: [
-    {
-      resolve: 'gatsby-theme-apollo',
-      options: {
-        root: __dirname
-      }
-    }
-  ],
   siteMetadata: {
     title: 'Principled GraphQL',
     description: 'Best practices for implementing and scaling a data graph'
   },
   plugins: [
+    {
+      resolve: 'gatsby-theme-apollo-core',
+      options: {
+        root: __dirname
+      }
+    },
     {
       resolve: 'gatsby-plugin-google-analytics',
       options: {
