@@ -30,15 +30,13 @@ module.exports = {
         plugins: [
           'gatsby-remark-autolink-headers',
           {
-            resolve: 'gatsby-remark-images',
+            resolve: 'gatsby-remark-copy-linked-files',
             options: {
-              linkImagesToOriginal: false
+              ignoreFileExtensions: []
             }
           }
         ]
       }
-    },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp'
+    }
   ]
 };

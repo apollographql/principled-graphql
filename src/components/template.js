@@ -8,30 +8,34 @@ import styled from '@emotion/styled';
 import {
   FlexWrapper,
   Layout,
-  LogoTitle,
+  Logo,
   MenuButton,
-  MobileHeader,
   ResponsiveSidebar,
   Sidebar,
   SidebarNav,
   breakpoints,
-  headerHeight
+  colors
 } from 'gatsby-theme-apollo-core';
 import {graphql} from 'gatsby';
 
-const OuterContentWrapper = styled.div({
-  flexGrow: 1,
-  overflow: 'auto',
-  outline: 'none',
-  WebkitOverflowScrolling: 'touch',
+const headerHeight = 64;
+const Header = styled.div({
+  display: 'none',
+  alignItems: 'center',
+  height: headerHeight,
+  width: '100%',
+  padding: '0 24px',
+  position: 'sticky',
+  top: 0,
+  color: colors.text1,
+  backgroundColor: 'white',
   [breakpoints.md]: {
-    paddingTop: headerHeight
+    display: 'flex'
   }
 });
 
-const StyledMobileHeader = styled(MobileHeader)({
-  width: '100%',
-  position: 'fixed'
+const Main = styled.main({
+  flexGrow: 1
 });
 
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
@@ -75,10 +79,7 @@ export default class Template extends Component {
               .slice(0, description.indexOf('.') + 1)
               .replace('>', '')
               .trim()
-              .replace(/\*/g, ''),
-            anchor:
-              node.frontmatter.path ===
-              this.props.location.pathname.replace(/\/$/, '')
+              .replace(/\*/g, '')
           });
         }
 
@@ -86,7 +87,7 @@ export default class Template extends Component {
           path: node.frontmatter.path,
           title: node.frontmatter.title,
           description: node.frontmatter.description,
-          image: node.frontmatter.image.childImageSharp.fluid.src,
+          image: node.frontmatter.image.publicURL,
           pages
         };
       });
@@ -109,26 +110,32 @@ export default class Template extends Component {
           />
         </Helmet>
         <ResponsiveSidebar>
-          {({sidebarRef, onWrapperClick, sidebarOpen, openSidebar}) => (
-            <FlexWrapper onClick={onWrapperClick}>
+          {({
+            sidebarRef,
+            handleWrapperClick,
+            handleSidebarNavLinkClick,
+            sidebarOpen,
+            openSidebar
+          }) => (
+            <FlexWrapper onClick={handleWrapperClick}>
               <Sidebar
-                noLogo
                 responsive
                 ref={sidebarRef}
                 open={sidebarOpen}
-                title={title}
+                logoLink="/"
               >
                 <SidebarNav
                   alwaysExpanded
                   pathname={this.props.location.pathname}
                   contents={contents}
+                  onLinkClick={handleSidebarNavLinkClick}
                 />
               </Sidebar>
-              <OuterContentWrapper tabIndex="0">
-                <StyledMobileHeader>
+              <Main>
+                <Header>
                   <MenuButton onClick={openSidebar} />
-                  <LogoTitle noLogo />
-                </StyledMobileHeader>
+                  <Logo />
+                </Header>
                 <Content
                   isHome={!this.props.data.markdownRemark.frontmatter.order}
                   contents={contents}
@@ -136,7 +143,7 @@ export default class Template extends Component {
                   pages={this.props.data.allMarkdownRemark.edges}
                 />
                 <Footer />
-              </OuterContentWrapper>
+              </Main>
             </FlexWrapper>
           )}
         </ResponsiveSidebar>
@@ -155,11 +162,7 @@ export const pageQuery = graphql`
         description
         order
         image {
-          childImageSharp {
-            fluid {
-              src
-            }
-          }
+          publicURL
         }
       }
     }
@@ -179,11 +182,7 @@ export const pageQuery = graphql`
             description
             order
             image {
-              childImageSharp {
-                fluid {
-                  src
-                }
-              }
+              publicURL
             }
           }
         }

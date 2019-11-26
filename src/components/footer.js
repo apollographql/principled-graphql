@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {LogoTitle, colors} from 'gatsby-theme-apollo-core';
+import {Logo, colors} from 'gatsby-theme-apollo-core';
 
 const Container = styled.footer({
   display: 'flex',
@@ -48,7 +48,7 @@ const Divider = styled.hr({
 export default function Footer() {
   return (
     <Container>
-      <LogoTitle noLogo />
+      <Logo />
       <Colophon>
         Written by <a href="https://twitter.com/GeoffQL">Geoff Schmidt</a> and{' '}
         <a href="https://twitter.com/debergalis">Matt DeBergalis</a>
