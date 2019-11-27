@@ -9,7 +9,7 @@ const Container = styled.footer({
   padding: 32,
   fontSize: 14,
   color: colors.text1,
-  backgroundColor: colors.background
+  borderTop: `1px solid ${colors.divider}`
 });
 
 const Colophon = styled.span({
