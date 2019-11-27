@@ -12,7 +12,7 @@
     "gatsby-remark-autolink-headers": "^2.0.13",
     "gatsby-remark-copy-linked-files": "^2.1.31",
     "gatsby-source-filesystem": "^2.0.33",
-    "gatsby-theme-apollo-core": "^3.0.1",
+    "gatsby-theme-apollo-core": "^3.0.2-alpha.1",
     "gatsby-transformer-remark": "^2.2.4",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"

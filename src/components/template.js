@@ -1,6 +1,5 @@
 import Content from './content';
 import Footer from './footer';
-import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import ogImage from '../assets/images/og-image.png';
@@ -11,6 +10,7 @@ import {
   Logo,
   MenuButton,
   ResponsiveSidebar,
+  SEO,
   Sidebar,
   SidebarNav,
   breakpoints,
@@ -93,22 +93,22 @@ export default class Template extends Component {
       });
 
     const {title, description} = this.props.data.site.siteMetadata;
+    const {frontmatter} = this.props.data.markdownRemark;
     return (
       <Layout>
-        <Helmet>
-          <title>{this.props.data.markdownRemark.frontmatter.title}</title>
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="og:image" content={ogImage} />
-          <meta name="twitter:card" content="summary_large_image" />
+        <SEO
+          title={frontmatter.title || title}
+          description={frontmatter.description || description}
+          siteName={title}
+          twitterCard="summary_large_image"
+        >
           <meta name="twitter:site" content="@apollographql" />
-          <meta name="twitter:title" content={title} />
-          <meta name="twitter:description" content={description} />
+          <meta property="og:image" content={ogImage} />
           <meta
             name="twitter:image"
             content={'https://principledgraphql.com' + ogImage}
           />
-        </Helmet>
+        </SEO>
         <ResponsiveSidebar>
           {({
             sidebarRef,
@@ -137,7 +137,7 @@ export default class Template extends Component {
                   <Logo />
                 </Header>
                 <Content
-                  isHome={!this.props.data.markdownRemark.frontmatter.order}
+                  isHome={!frontmatter.order}
                   contents={contents}
                   page={this.props.data.markdownRemark}
                   pages={this.props.data.allMarkdownRemark.edges}
