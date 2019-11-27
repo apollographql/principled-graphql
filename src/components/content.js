@@ -54,6 +54,9 @@ const Markdown = styled.div({
     marginLeft: 24,
     marginBottom: 24,
     float: 'right',
+    img: {
+      width: '100%'
+    },
     [breakpoints.sm]: {
       width: '100%',
       marginLeft: 0,
@@ -101,7 +104,7 @@ export default function Content(props) {
         {title && (
           <Fragment>
             <MainHeading>
-              {image && <HeadingImage src={image.childImageSharp.fluid.src} />}
+              {image && <HeadingImage src={image.publicURL} />}
               <span>
                 {title}
                 <ChapterDescription>{description}</ChapterDescription>
