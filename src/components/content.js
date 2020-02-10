@@ -10,10 +10,6 @@ import {
 import {Link} from 'gatsby';
 import {size} from 'polished';
 
-const InnerWrapper = styled.div({
-  maxWidth: 800
-});
-
 const MainHeading = styled.h1({
   display: 'flex',
   alignItems: 'center'
@@ -100,56 +96,52 @@ export default function Content(props) {
 
   return (
     <ContentWrapper>
-      <InnerWrapper>
-        {title && (
-          <Fragment>
-            <MainHeading>
-              {image && <HeadingImage src={image.publicURL} />}
-              <span>
-                {title}
-                <ChapterDescription>{description}</ChapterDescription>
-              </span>
-            </MainHeading>
-            <hr />
-          </Fragment>
+      {title && (
+        <Fragment>
+          <MainHeading>
+            {image && <HeadingImage src={image.publicURL} />}
+            <span>
+              {title}
+              <ChapterDescription>{description}</ChapterDescription>
+            </span>
+          </MainHeading>
+          <hr />
+        </Fragment>
+      )}
+      <Markdown>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: props.page.html
+          }}
+        />
+        {props.isHome && (
+          <div>
+            {props.contents.map(content => (
+              <Chapter key={content.path}>
+                <ChapterHeading>
+                  <HeadingImage src={content.image} />
+                  <span>
+                    {content.title}
+                    <ChapterDescription>
+                      {content.description}
+                    </ChapterDescription>
+                  </span>
+                </ChapterHeading>
+                <hr />
+                {content.pages.map(page => (
+                  <div key={page.path}>
+                    <SectionTitle>
+                      <Link to={page.path}>{page.title}</Link>
+                    </SectionTitle>
+                    <SectionDescription>{page.description}</SectionDescription>
+                  </div>
+                ))}
+              </Chapter>
+            ))}
+          </div>
         )}
-        <Markdown>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: props.page.html
-            }}
-          />
-          {props.isHome && (
-            <div>
-              {props.contents.map(content => (
-                <Chapter key={content.path}>
-                  <ChapterHeading>
-                    <HeadingImage src={content.image} />
-                    <span>
-                      {content.title}
-                      <ChapterDescription>
-                        {content.description}
-                      </ChapterDescription>
-                    </span>
-                  </ChapterHeading>
-                  <hr />
-                  {content.pages.map(page => (
-                    <div key={page.path}>
-                      <SectionTitle>
-                        <Link to={page.path}>{page.title}</Link>
-                      </SectionTitle>
-                      <SectionDescription>
-                        {page.description}
-                      </SectionDescription>
-                    </div>
-                  ))}
-                </Chapter>
-              ))}
-            </div>
-          )}
-        </Markdown>
-        <PageNav prevPage={prevPage} nextPage={nextPage} />
-      </InnerWrapper>
+      </Markdown>
+      <PageNav prevPage={prevPage} nextPage={nextPage} />
     </ContentWrapper>
   );
 }
