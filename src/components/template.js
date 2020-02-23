@@ -102,6 +102,7 @@ export default class Template extends Component {
           siteName={title}
           twitterCard="summary_large_image"
         >
+          <html lang="en" />
           <meta name="twitter:site" content="@apollographql" />
           <meta property="og:image" content={ogImage} />
           <meta

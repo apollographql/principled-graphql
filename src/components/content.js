@@ -99,7 +99,9 @@ export default function Content(props) {
       {title && (
         <Fragment>
           <MainHeading>
-            {image && <HeadingImage src={image.publicURL} />}
+            {image && (
+              <HeadingImage src={image.publicURL} alt={`${title} logo`} />
+            )}
             <span>
               {title}
               <ChapterDescription>{description}</ChapterDescription>
@@ -119,7 +121,10 @@ export default function Content(props) {
             {props.contents.map(content => (
               <Chapter key={content.path}>
                 <ChapterHeading>
-                  <HeadingImage src={content.image} />
+                  <HeadingImage
+                    src={content.image}
+                    alt={`${content.title} logo`}
+                  />
                   <span>
                     {content.title}
                     <ChapterDescription>
