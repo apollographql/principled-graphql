@@ -29,6 +29,7 @@ const Header = styled.div({
   top: 0,
   color: colors.text1,
   backgroundColor: 'white',
+  zIndex: 10,
   [breakpoints.md]: {
     display: 'flex'
   }
