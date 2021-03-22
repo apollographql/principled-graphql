@@ -140,7 +140,7 @@ export default class Template extends Component {
                   contents={contents}
                   onLinkClick={handleSidebarNavLinkClick}
                 />
-                <CtaLink href="https://apollographql.com?utm_medium=website&utm_source=principledgraphql.com&utm_campaign=sidebar_cta&utm_content=sidebar" target="_blank" rel="noopener noreferrer">Learn how to apply these ten principles with the Apollo Data Graph Platform</CtaLink>
+                <CtaLink href="https://apollographql.com?utm_medium=website&utm_source=principledgraphql.com&utm_campaign=sidebar-cta&utm_content=sidebar" target="_blank" rel="noopener noreferrer">Learn how to apply these ten principles with the Apollo Data Graph Platform</CtaLink>
               </Sidebar>
               <Main>
                 <Header>
