@@ -38,6 +38,22 @@ const Main = styled.main({
   flexGrow: 1
 });
 
+const CtaHeading = styled.h4({
+  lineHeight: '24px'
+});
+
+const CtaBtn = styled.a({
+  background: colors.primary,
+  borderRadius: 4,
+  color: '#fff',
+  padding: '12px 34px',
+  textDecoration: 'none',
+  display: 'inline-block',
+  '&:hover': {
+    background: '#311C87'
+  }
+});
+
 const anchorPattern = /<a href="([\w/#-]+)">([\w\s.,-]+)<\/a>/gm;
 
 export default class Template extends Component {
@@ -131,6 +147,17 @@ export default class Template extends Component {
                   contents={contents}
                   onLinkClick={handleSidebarNavLinkClick}
                 />
+                <CtaHeading>
+                  Learn how to apply these ten principles with the Apollo Data
+                  Graph Platform
+                </CtaHeading>
+                <CtaBtn
+                  href="https://apollographql.com?utm_medium=website&utm_source=principledgraphql.com&utm_campaign=sidebar-cta&utm_content=sidebar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Started
+                </CtaBtn>
               </Sidebar>
               <Main>
                 <Header>
