@@ -1,7 +1,7 @@
 import Content from './content';
 import Footer from './footer';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ogImage from '../assets/images/og-image.png';
 import styled from '@emotion/styled';
 import {
@@ -16,7 +16,7 @@ import {
   breakpoints,
   colors
 } from 'gatsby-theme-apollo-core';
-import { graphql } from 'gatsby';
+import {graphql} from 'gatsby';
 
 const headerHeight = 64;
 const Header = styled.div({
@@ -75,8 +75,8 @@ export default class Template extends Component {
     // generate a representation of the chapters and sections within them to
     // render the sidebar and table of contents on the overview page
     const contents = this.props.data.allMarkdownRemark.edges
-      .filter(({ node }) => node.frontmatter.order > 0 && node.tableOfContents)
-      .map(({ node }) => {
+      .filter(({node}) => node.frontmatter.order > 0 && node.tableOfContents)
+      .map(({node}) => {
         let match;
         const pages = [];
         while ((match = anchorPattern.exec(node.tableOfContents)) !== null) {
@@ -108,8 +108,8 @@ export default class Template extends Component {
         };
       });
 
-    const { title, description } = this.props.data.site.siteMetadata;
-    const { frontmatter } = this.props.data.markdownRemark;
+    const {title, description} = this.props.data.site.siteMetadata;
+    const {frontmatter} = this.props.data.markdownRemark;
     return (
       <Layout>
         <SEO
@@ -147,8 +147,17 @@ export default class Template extends Component {
                   contents={contents}
                   onLinkClick={handleSidebarNavLinkClick}
                 />
-                <CtaHeading>Learn how to apply these ten principles with the Apollo Data Graph Platform</CtaHeading>
-                <CtaBtn href="https://apollographql.com?utm_medium=website&utm_source=principledgraphql.com&utm_campaign=sidebar-cta&utm_content=sidebar" target="_blank" rel="noopener noreferrer">Get Started</CtaBtn>
+                <CtaHeading>
+                  Learn how to apply these ten principles with the Apollo Data
+                  Graph Platform
+                </CtaHeading>
+                <CtaBtn
+                  href="https://apollographql.com?utm_medium=website&utm_source=principledgraphql.com&utm_campaign=sidebar-cta&utm_content=sidebar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Started
+                </CtaBtn>
               </Sidebar>
               <Main>
                 <Header>
