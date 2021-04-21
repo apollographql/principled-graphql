@@ -22,7 +22,7 @@ It may be tempting to try to define, ahead of time, the “perfect schema” for
 
 Fields shouldn't be added to the schema speculatively. Ideally, each field should be added only in response to a concrete need by a consumer for additional functionality, while being designed for maximum reuse by other consumers that have similar needs.
 
-Updating the graph should be a continuous process. Rather than releasing a new “version” of the graph periodically, such as every 6 or 12 months, it should be possible to change the graph many times a day if necessary. New fields can be added at any time. To remove a field, it is first deprecated, and then removed when no consumers use it. The schema registry enables this agile evolution of the graph, together with processes and tooling that keep everyone aware of changes that could affect them. This ensures that only fully vetted changes can go into production.
+Updating the graph should be a continuous process. Rather than releasing a new “version” of the graph periodically, such as every 6 or 12 months, it should be possible to change the graph many times a day if necessary. New fields can be added at any time. To remove a field, first deprecate it, and then remove it when consumers are no longer using it. The schema registry enables this agile evolution of the graph, together with processes and tooling that keep everyone aware of changes that could affect them. This ensures that only fully vetted changes can go into production.
 
 ## 6. Iteratively Improve Performance
 
