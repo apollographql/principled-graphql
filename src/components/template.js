@@ -148,8 +148,8 @@ export default class Template extends Component {
                   onLinkClick={handleSidebarNavLinkClick}
                 />
                 <CtaHeading>
-                  Learn how to apply these ten principles with the Apollo Data
-                  Graph Platform
+                  Learn how to apply these ten principles with the Apollo Graph
+                  Platform
                 </CtaHeading>
                 <CtaBtn
                   href="https://apollographql.com?utm_medium=website&utm_source=principledgraphql.com&utm_campaign=sidebar-cta&utm_content=sidebar"
