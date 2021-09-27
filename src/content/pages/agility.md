@@ -28,7 +28,7 @@ Updating the graph should be a continuous process. Rather than releasing a new â
 
 > Performance management should be a **continuous, data-driven process**, adapting smoothly to changing query loads and service implementations.
 
-The data graph layer is the right place to hold the conversation about performance and capacity that always must occur between services teams and the app developers that consume their services. This conversation should be an ongoing process that gives service developers continuous and proactive visibility into what consumers intend to do with their services.
+The graph layer is the right place to hold the conversation about performance and capacity that always must occur between services teams and the app developers that consume their services. This conversation should be an ongoing process that gives service developers continuous and proactive visibility into what consumers intend to do with their services.
 
 Rather than optimizing every possible use of the graph, the focus should be on supporting the actual query shapes that are needed in production. Tooling should extract proposed new query shapes and surface them, before they go into production, to all affected service teams with latency requirements and projected query volume. Once the query is in production, its performance should be continuously monitored. If this principle is followed, problems should be easy to track back to the service that is not behaving as expected.
 
@@ -36,7 +36,7 @@ Rather than optimizing every possible use of the graph, the focus should be on s
 
 > Developers should be equipped with **rich awareness of the graph** throughout the entire development process.
 
-A major part of GraphQL's value is the massive productivity boost that it gives to developers. To maximize this boost, a developer's tooling should give them ubiquitous awareness of the data graph, threaded through all of the tools that they use throughout the entire development lifecycle.
+A major part of GraphQL's value is the massive productivity boost that it gives to developers. To maximize this boost, a developer's tooling should give them ubiquitous awareness of the graph, threaded through all of the tools that they use throughout the entire development lifecycle.
 
 Whenever a developer is doing work that relates to managing data or connecting to services, their tooling should put live information about the graph at their fingertips. This information should always be up-to-date and the tooling should be highly intelligent, applying graph awareness to the situation at hand in helpful and powerful ways. When done properly, not only does developer productivity and happiness increase, but GraphQL becomes the fabric that connects the frontend and backend teams, enabling seamless conversations throughout the development lifecycle.
 
