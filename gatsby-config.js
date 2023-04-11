@@ -11,9 +11,12 @@ module.exports = {
       }
     },
     {
-      resolve: 'gatsby-plugin-google-analytics',
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingId: 'UA-74643563-15'
+        trackingIds: [
+          'UA-74643563-15', // universal analytics - going away Jul 2023
+          'G-W76RRKRXRM'
+        ]
       }
     },
     {
