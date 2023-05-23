@@ -20,5 +20,6 @@
   "devDependencies": {
     "@trevorblades/eslint-config": "^7.0.1",
     "eslint": "^5.13.0"
-  }
+  },
+  "name": "principled-graphql"
 }
