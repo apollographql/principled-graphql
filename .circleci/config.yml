@@ -2,25 +2,8 @@ version: 2.1
 
 orbs:
   secops: apollo/circleci-secops-orb@2.0.7
-  node: circleci/node@5.2.0
-
-jobs:
-  build:
-    executor:
-      name: node/default
-      tag: '22.12'
-    steps:
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm-ci
-      - run: npm run check
-      - run: npm run build
 
 workflows:
-  build:
-    jobs:
-      - build
-
   security-scans:
     jobs:
       - secops/gitleaks:
