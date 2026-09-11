@@ -1,12 +1,12 @@
-/* Design tokens lifted from the Gatsby build of this site (gatsby-theme-apollo-core),
-   so the Astro rebuild renders identically.  Don't drift these without a visual diff. */
+/* Tokens and type scale read off the deployed Gatsby build's computed styles,
+   so the Astro rebuild renders the same.  Body copy is text2; only headings
+   are text1.  Don't drift these without a visual diff against production. */
 :root {
   --primary: #3f20ba;
   --primary-dark: #311c87;
   --text1: #2f353f;
   --text2: #5a6270;
   --divider: #dee2e7;
-  --background: #f4f6f8;
   --sidebar-width: 312px;
   --header-height: 64px;
   --font-body: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -29,45 +29,12 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  color: var(--text1);
-  background-color: var(--background);
+  color: var(--text2);
+  background-color: white;
 }
 
-a {
-  color: var(--primary);
-}
+/* Typography ------------------------------------------------------------- */
 
-code {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  padding: 3px 10px;
-  border-radius: 4px;
-  background-color: var(--divider);
-}
-
-pre {
-  padding: 24px 32px;
-  border-radius: 4px;
-  overflow-x: auto;
-}
-
-pre code {
-  padding: 0;
-  background: none;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid var(--divider);
-  margin: 24px 0;
-}
-
-img {
-  max-width: 100%;
-}
-
-/* Typography.js scale carried over from the Gatsby theme — headings are
-   weight 400, not bold. */
 h1,
 h2,
 h3,
@@ -76,7 +43,6 @@ h5,
 h6,
 p,
 ol,
-ul,
 img {
   margin: 0 0 24px;
 }
@@ -105,8 +71,68 @@ h3 {
 }
 
 h4 {
-  font-size: 1rem;
+  font-size: 1.125rem;
   margin-bottom: 1.0875rem;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+ul {
+  margin: 0 0 32px;
+}
+
+li {
+  margin-bottom: 13px;
+  line-height: 1.5;
+}
+
+blockquote {
+  margin: 16px 40px 16px 0;
+  padding: 12px 20px;
+  border-left: 2px solid var(--primary);
+}
+
+blockquote p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--primary);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background-color: var(--divider);
+}
+
+pre {
+  padding: 24px 32px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+hr {
+  height: 1px;
+  margin: 8px 0 23px;
+  border: none;
+  background-color: var(--divider);
+}
+
+img {
+  max-width: 100%;
 }
 
 /* Layout ------------------------------------------------------------------ */
@@ -116,7 +142,6 @@ h4 {
   align-items: flex-start;
   max-width: 1440px;
   margin: 0 auto;
-  background-color: white;
 }
 
 .main {
@@ -124,8 +149,9 @@ h4 {
   min-width: 0;
 }
 
+/* Deliberately uncapped — the 1440px wrapper is the only width constraint,
+   matching the Gatsby layout. */
 .content {
-  max-width: 850px;
   padding: 40px 56px;
 }
 
