@@ -16,16 +16,41 @@ const {prev, next} = Astro.props;
   {
     prev && (
       <a class="prev" href={prev.path}>
-        <span class="label">Previous</span>
-        <span class="title">{prev.title}</span>
+        <svg viewBox="0 0 14 24" aria-hidden="true">
+          <path
+            fill="none"
+            fill-rule="evenodd"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M12.5.75L1.78 11.47a.749.749 0 0 0-.001 1.059l.001.001L12.5 23.25"
+          />
+        </svg>
+        <div class="box">
+          <div class="label">Previous</div>
+          <div class="title">{prev.title}</div>
+        </div>
       </a>
     )
   }
   {
     next && (
       <a class="next" href={next.path}>
-        <span class="label">Next</span>
-        <span class="title">{next.title}</span>
+        <div class="box">
+          <div class="label">Next</div>
+          <div class="title">{next.title}</div>
+        </div>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M5.5.75l10.72 10.72a.749.749 0 0 1 .001 1.059l-.001.001L5.5 23.25"
+          />
+        </svg>
       </a>
     )
   }
@@ -34,37 +59,46 @@ const {prev, next} = Astro.props;
 <style>
   .page-nav {
     display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 56px;
-    padding-top: 24px;
-    border-top: 1px solid var(--divider);
+    padding: 64px 0;
   }
 
   .page-nav a {
     display: flex;
-    flex-direction: column;
-    color: var(--primary);
+    align-items: center;
+    color: var(--text2);
     text-decoration: none;
-  }
-
-  .page-nav a:hover .title {
-    text-decoration: underline;
   }
 
   .next {
     margin-left: auto;
+  }
+
+  svg {
+    display: block;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
+
+  .prev .box {
+    margin-left: 24px;
+  }
+
+  .next .box {
+    margin-right: 24px;
     text-align: right;
   }
 
   .label {
-    font-size: 0.8rem;
+    font-size: 12px;
+    line-height: 17.4px;
+    letter-spacing: 0.142em;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text2);
   }
 
   .title {
-    font-weight: 600;
+    font-size: 1rem;
+    line-height: 23.2px;
+    color: var(--text1);
   }
 </style>

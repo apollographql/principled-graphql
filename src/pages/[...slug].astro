@@ -148,6 +148,24 @@ const linkFor = (entry: typeof prev) =>
     margin-top: 56px;
   }
 
+  /* Autolinked heading anchors sit in the gutter, matching the Gatsby build. */
+  .markdown :is(h1, h2, h3, h4, h5, h6) {
+    position: relative;
+  }
+
+  .markdown a.anchor {
+    position: absolute;
+    left: 0;
+    display: block;
+    padding-right: 4px;
+    transform: translateX(-20px);
+    color: var(--text1);
+  }
+
+  .markdown a.anchor svg {
+    fill: currentColor;
+  }
+
   /* Used by the overview page to run its logo alongside the intro copy. */
   .markdown .float {
     width: 50%;
