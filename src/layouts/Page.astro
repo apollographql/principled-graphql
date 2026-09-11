@@ -1,0 +1,123 @@
+---
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteName = 'Principled GraphQL';
+const siteDescription = 'Best practices for implementing and scaling a graph';
+
+const {title, description = siteDescription} = Astro.props;
+const pageTitle = title ? `${title} - ${siteName}` : siteName;
+const ogImage = new URL('/og-image.png', Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// The UA property that used to sit alongside this was switched off in July 2023.
+const gaMeasurementId = 'G-W76RRKRXRM';
+
+// Branch and deploy-preview builds share this markup on a netlify.app host —
+// keep them out of the index rather than relying on the canonical alone.
+const isProduction = process.env.CONTEXT === 'production';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&family=Source+Sans+Pro:wght@400;600&display=swap"
+    />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {!isProduction && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title ?? siteName} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@apollographql" />
+    <meta name="twitter:title" content={title ?? siteName} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}></script>
+    <script is:inline define:vars={{gaMeasurementId}}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', gaMeasurementId);
+    </script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <Sidebar pathname={Astro.url.pathname} />
+      <div class="main">
+        <div class="header">
+          <button class="menu-button" id="menu-button" aria-label="Open menu">
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+              >
+                <path d="M2.25 18.003h19.5M2.25 12.003h19.5M2.25 6.003h19.5"
+                ></path>
+              </g>
+            </svg>
+          </button>
+          <h4 class="header-logo">Principled GraphQL</h4>
+        </div>
+        <main class="content">
+          <slot />
+        </main>
+        <Footer />
+      </div>
+    </div>
+
+    <script>
+      const sidebar = document.getElementById('sidebar');
+      const button = document.getElementById('menu-button');
+
+      button?.addEventListener('click', event => {
+        event.stopPropagation();
+        sidebar?.toggleAttribute('data-open');
+      });
+
+      // Tapping the page or following a nav link closes the drawer again.
+      document.addEventListener('click', event => {
+        if (!sidebar?.hasAttribute('data-open')) return;
+        if (event.target instanceof Node && sidebar.contains(event.target)) {
+          if (!(event.target instanceof HTMLAnchorElement)) return;
+        }
+        sidebar.removeAttribute('data-open');
+      });
+    </script>
+
+    <style>
+      .header-logo {
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>

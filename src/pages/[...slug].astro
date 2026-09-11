@@ -1,0 +1,188 @@
+---
+import {render} from 'astro:content';
+import Page from '../layouts/Page.astro';
+import PageNav from '../components/PageNav.astro';
+import {getPages, getChapters} from '../lib/nav';
+
+export async function getStaticPaths() {
+  const pages = await getPages();
+
+  return pages.map((page, index) => ({
+    // The frontmatter `path` is the published URL — '/' for the overview.
+    params: {slug: page.data.path === '/' ? undefined : page.data.path.slice(1)},
+    props: {
+      page,
+      prev: pages[index - 1],
+      next: pages[index + 1]
+    }
+  }));
+}
+
+const {page, prev, next} = Astro.props;
+const {title, description, image} = page.data;
+const {Content} = await render(page);
+
+// Only the overview lists every chapter beneath its prose.
+const isHome = page.data.order === 0;
+const chapters = isHome ? await getChapters() : [];
+
+const linkFor = (entry: typeof prev) =>
+  entry && {
+    path: entry.data.path,
+    title: entry.data.title ?? 'Overview'
+  };
+---
+
+<Page title={title} description={description}>
+  {
+    title && (
+      <>
+        <h1 class="main-heading">
+          {image && <img class="heading-image" src={image} alt={`${title} logo`} />}
+          <span>
+            {title}
+            <h4 class="chapter-description">{description}</h4>
+          </span>
+        </h1>
+        <hr />
+      </>
+    )
+  }
+
+  <div class="markdown">
+    <Content />
+
+    {
+      isHome && (
+        <div>
+          {chapters.map(chapter => (
+            <div class="chapter">
+              <h2 class="chapter-heading">
+                <img
+                  class="heading-image"
+                  src={chapter.image}
+                  alt={`${chapter.title} logo`}
+                />
+                <span>
+                  {chapter.title}
+                  <h4 class="chapter-description">{chapter.description}</h4>
+                </span>
+              </h2>
+              <hr />
+              {chapter.sections.map(section => (
+                <div>
+                  <h4 class="section-title">
+                    <a href={section.path}>{section.title}</a>
+                  </h4>
+                  <p class="section-description">{section.description}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+
+  <PageNav prev={linkFor(prev)} next={linkFor(next)} />
+</Page>
+
+<style>
+  .main-heading,
+  .chapter-heading {
+    display: flex;
+    align-items: center;
+  }
+
+  .heading-image {
+    width: 2.5em;
+    height: 2.5em;
+    margin: 0 0.25em 0 0;
+  }
+
+  /* Nested inside the h1/h2, so the heading scale has to be reset explicitly. */
+  .chapter-description {
+    display: block;
+    margin: 4px 0;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text2);
+  }
+
+  .chapter {
+    margin-top: 64px;
+  }
+
+  .section-title {
+    margin-bottom: 8px;
+  }
+
+  .section-title a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .section-title a:hover {
+    text-decoration: underline;
+  }
+
+  .section-description {
+    margin-bottom: 24px;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+</style>
+
+<style is:global>
+  .markdown a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .markdown a:hover {
+    text-decoration: underline;
+  }
+
+  .markdown h2:not(:first-child) {
+    margin-top: 56px;
+  }
+
+  /* Autolinked heading anchors sit in the gutter, matching the Gatsby build. */
+  .markdown :is(h1, h2, h3, h4, h5, h6) {
+    position: relative;
+  }
+
+  .markdown a.anchor {
+    position: absolute;
+    left: 0;
+    display: block;
+    padding-right: 4px;
+    transform: translateX(-20px);
+    color: var(--text1);
+  }
+
+  .markdown a.anchor svg {
+    fill: currentColor;
+  }
+
+  /* Used by the overview page to run its logo alongside the intro copy. */
+  .markdown .float {
+    width: 50%;
+    margin-left: 24px;
+    margin-bottom: 24px;
+    float: right;
+  }
+
+  .markdown .float img {
+    width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    .markdown .float {
+      width: 100%;
+      margin-left: 0;
+      float: none;
+    }
+  }
+</style>

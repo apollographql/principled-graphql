@@ -1,16 +1,18 @@
 # Principled GraphQL
 
-This website highlights best practices for implementing and scaling a graph. It's built with [Gatsby](https://gatsbyjs.org) using [our custom theme](https://github.com/apollographql/gatsby-theme-apollo/tree/master/packages/gatsby-theme-apollo-core).
+This website highlights best practices for implementing and scaling a graph.  It's built with [Astro](https://astro.build).
 
 ## Developing locally
 
-Set up the website for local development by cloning this repo, installing Node dependencies, and then starting the Gatsby development server.
-
 ```bash
-$ npm install
-$ npm start
+npm install
+npm start
 ```
+
+The content lives in `src/content/pages/`.  Each page's URL comes from its `path` frontmatter, and `order` drives the sidebar and the prev/next links.
+
+Every `##` heading is a principle, and the blockquote directly beneath it is the summary shown in the sidebar and on the overview page — so keep that pairing intact when editing.
 
 ## Deploying
 
-This website deploys the `master` branch to production via [Netlify](https://netlify.com) whenever a new commit appears. There's no extra steps required for the developer! :tada:
+`master` deploys to production via [Netlify](https://netlify.com) on every commit.  Build settings live in `netlify.toml`.
