@@ -1,5 +1,6 @@
 // @ts-check
 import {defineConfig} from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 import {unified} from '@astrojs/markdown-remark';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -32,6 +33,7 @@ const linkIcon = {
 
 export default defineConfig({
   site: 'https://principledgraphql.com',
+  integrations: [sitemap()],
   // Heading ids come from Astro's default github-slugger, which reproduces the
   // anchor format the Gatsby site published (e.g. #1-one-graph).  Don't swap it.
   markdown: {

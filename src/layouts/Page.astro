@@ -18,6 +18,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 // The UA property that used to sit alongside this was switched off in July 2023.
 const gaMeasurementId = 'G-W76RRKRXRM';
+
+// Branch and deploy-preview builds share this markup on a netlify.app host —
+// keep them out of the index rather than relying on the canonical alone.
+const isProduction = process.env.CONTEXT === 'production';
 ---
 
 <!doctype html>
@@ -34,6 +38,7 @@ const gaMeasurementId = 'G-W76RRKRXRM';
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {!isProduction && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteName} />
