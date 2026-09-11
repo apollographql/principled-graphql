@@ -1,0 +1,70 @@
+---
+interface Link {
+  path: string;
+  title: string;
+}
+
+interface Props {
+  prev?: Link;
+  next?: Link;
+}
+
+const {prev, next} = Astro.props;
+---
+
+<nav class="page-nav">
+  {
+    prev && (
+      <a class="prev" href={prev.path}>
+        <span class="label">Previous</span>
+        <span class="title">{prev.title}</span>
+      </a>
+    )
+  }
+  {
+    next && (
+      <a class="next" href={next.path}>
+        <span class="label">Next</span>
+        <span class="title">{next.title}</span>
+      </a>
+    )
+  }
+</nav>
+
+<style>
+  .page-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--divider);
+  }
+
+  .page-nav a {
+    display: flex;
+    flex-direction: column;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .page-nav a:hover .title {
+    text-decoration: underline;
+  }
+
+  .next {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text2);
+  }
+
+  .title {
+    font-weight: 600;
+  }
+</style>

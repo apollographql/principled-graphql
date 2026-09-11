@@ -1,24 +1,20 @@
 {
+  "name": "principled-graphql",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "npm run develop"
-  },
-  "eslintConfig": {
-    "extends": "@trevorblades/eslint-config/react"
+    "develop": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
   },
   "dependencies": {
-    "gatsby": "^2.23.11",
-    "gatsby-plugin-google-gtag": "^2.8.0",
-    "gatsby-remark-autolink-headers": "^2.1.19",
-    "gatsby-remark-copy-linked-files": "^2.1.31",
-    "gatsby-source-filesystem": "^2.0.33",
-    "gatsby-theme-apollo-core": "^3.0.16",
-    "gatsby-transformer-remark": "^2.2.4",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "astro": "^7.3.2",
+    "zod": "^4.6.2"
   },
   "devDependencies": {
-    "@trevorblades/eslint-config": "^7.0.1",
-    "eslint": "^5.13.0"
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }

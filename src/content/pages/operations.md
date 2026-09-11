@@ -3,7 +3,7 @@ path: /operations
 title: Operations Principles
 description: Securely deploying the graph to production at scale
 order: 3
-image: ../images/operations.png
+image: /images/operations.png
 ---
 
 ## 8. Access and Demand Control
